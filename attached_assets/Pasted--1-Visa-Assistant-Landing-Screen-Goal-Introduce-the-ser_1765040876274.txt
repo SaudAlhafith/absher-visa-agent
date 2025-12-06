@@ -1,0 +1,156 @@
+
+
+## 1. Visa Assistant – Landing Screen
+
+**Goal:** Introduce the service inside Absher and let the user start a new visa preparation flow.
+
+**What the user sees:**
+
+* **Page Title:**
+  “Visa Preparation Assistant”
+
+* **Short description text:**
+  Explains that Absher will prepare all visa requirements and embassy documents using existing government data, and help with booking an appointment.
+
+* **Primary CTA button:**
+  “Start a New Visa Request”
+
+* **Optional secondary section:**
+
+  * “Previous Requests” – simple list of past requests (country + date + status: Draft / Completed).
+  * Each item has a “View PDF Pack” / “Resume” action.
+
+This screen is very simple: one hero card, one main button, maybe a small list.
+
+---
+
+## 2. Select Country, Visa Type & Travelers
+
+**Goal:** Collect the basic inputs: destination country, visa type, and which family members are included.
+
+**What the user sees:**
+
+* **Progress indicator:**
+  Step 1 of 3 – “Basic Details”
+
+* **Country selection block:**
+
+  * Search field + country list.
+  * Each country row shows:
+
+    * Country name and flag.
+    * Small status label from Passport Index (e.g. “Visa required”, “e-Visa”, “Visa-free”, “Travel not allowed for Saudis”).
+  * If the country is not eligible, show a short warning banner.
+
+* **Visa type selection block:**
+
+  * Dropdown or segmented buttons:
+    Examples: “Tourist visa”, “Business visa”, “Student visa”, etc.
+    (Content is static / mock for now; real options will come from the rules data.)
+
+* **Traveler selection block:**
+
+  * Section title: “Who is traveling?”
+  * List of the user + family members (pulled from Absher):
+
+    * Each row: name, relationship, ID number.
+    * Checkbox or toggle to include/exclude.
+  * Option “Add new dependent” is just a placeholder (no real flow needed in prototype).
+
+* **Primary CTA:**
+  “Continue – Check Requirements”
+
+---
+
+## 3. Requirements & Documents Summary
+
+**Goal:** Show a clear, human-readable breakdown of what is required for each selected traveler, based on rules + existing data, and generate the PDF pack.
+
+**What the user sees:**
+
+* **Progress indicator:**
+  Step 2 of 3 – “Requirements & Documents”
+
+* **Country / visa header:**
+
+  * Small card: “Destination: France – Tourist Visa”
+  * Short line: “Using data from Passport Index & government records.”
+
+* **Requirements summary (per application):**
+
+  * A list of bullet points such as:
+
+    * “Valid passport (at least 6 months).”
+    * “Travel insurance covering the entire stay.”
+    * “Flight booking / itinerary.”
+    * “Hotel reservation or address of stay.”
+  * Each item has a small status icon:
+
+    * “Available from Absher data” (e.g. ID, family information).
+    * “To be provided by you” (e.g. hotel booking).
+
+* **Traveler cards:**
+
+  * For each selected family member:
+
+    * Name and relationship.
+    * Short text: “We prepared a personalized document list for this traveler.”
+    * Button: “Preview PDF Pack” (opens a mock PDF or placeholder page).
+    * Tags like: “Ready”, “Missing 2 items”, etc. (status computed by the rules engine).
+
+* **Informational note:**
+
+  * A short banner explaining:
+    “All personal data used here comes from your existing government records. No extra typing needed.”
+
+* **Primary CTA:**
+  “Continue – Book Embassy Appointment”
+
+* **Secondary CTA:**
+  “Download All PDFs”
+
+---
+
+## 4. Embassy Appointment & Confirmation
+
+**Goal:** Help the user choose or reach an embassy appointment and finalize the flow.
+
+**What the user sees:**
+
+* **Progress indicator:**
+  Step 3 of 3 – “Embassy Appointment”
+
+* **Appointment options block:**
+
+  * If integration exists (mocked in prototype):
+
+    * Simple date + time picker.
+    * Selected embassy location (e.g. “French Embassy – Riyadh”).
+    * Small note: “Slots provided by the embassy’s booking system.”
+  * If no integration:
+
+    * Info text:
+      “Appointment booking for this embassy is handled on their website.”
+    * Button: “Go to Embassy Booking Website” (external link).
+
+* **Summary card:**
+
+  * Country & visa type.
+  * Travelers included.
+  * Short line: “Your document pack is ready. Please print it and bring it to your appointment.”
+
+* **Primary CTA:**
+  “Finish & View Summary”
+
+* **Completion state (after tap):**
+
+  * Simple success screen:
+
+    * Check icon.
+    * Text: “Your visa preparation is complete.”
+    * Buttons:
+
+      * “Download PDF Pack”
+      * “Back to Absher Home”
+
+

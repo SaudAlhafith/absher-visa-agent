@@ -1,0 +1,207 @@
+
+
+# ✅ **Absher Style Specification (Based on Screenshot)**
+
+## **1. Colors**
+
+### **Primary Colors**
+
+| Purpose               | Color     | Notes                                    |
+| --------------------- | --------- | ---------------------------------------- |
+| **Primary Green**     | `#1E9B63` | Buttons, icons, highlights, action items |
+| **Dark Green**        | `#0F6B3A` | Hover states, emphasis text              |
+| **Light Green Badge** | `#E6F5EE` | Background of new-feature tags           |
+
+### **Neutral / Base Colors**
+
+| Purpose                   | Color     |
+| ------------------------- | --------- |
+| **Background Light Gray** | `#F5F6F8` |
+| **Card White**            | `#FFFFFF` |
+| **Border Light Gray**     | `#E4E4E4` |
+| **Text Dark Gray**        | `#444444` |
+| **Text Medium Gray**      | `#777777` |
+| **Text Light Gray**       | `#A0A0A0` |
+
+---
+
+## **2. Typography**
+
+Absher uses a modern, clean Arabic-friendly UI typeface similar to **GE SS**, **Helvetica Neue Arabic**, or **DIN Next Arabic**.
+
+### **Font Weights**
+
+* **Bold** for titles
+* **Medium (600)** for main labels
+* **Regular (400)** for normal text
+* **Light (300)** for secondary or muted text
+
+### **Font Sizes**
+
+| Element               | Size         |
+| --------------------- | ------------ |
+| Page titles           | **24–26 px** |
+| Section headings      | **20 px**    |
+| Button text           | **16–17 px** |
+| Card labels           | **16 px**    |
+| Body/description text | **14–15 px** |
+| Small metadata        | **12–13 px** |
+
+---
+
+## **3. Layout & Spacing**
+
+Absher UI is built on a **very spacious, light grid**.
+
+### **General Rules**
+
+* **Large breathing space** everywhere.
+* **48–64 px** padding top/bottom for main sections.
+* **24–32 px** spacing between cards.
+* **16 px** spacing inside components (inner padding).
+* **Rounded corners:**
+
+  * Cards: **12 px**
+  * Buttons: **8–12 px**
+  * Icons containers: **50% (circular)**
+
+### **Containers**
+
+* White cards with gentle shadow:
+
+  * `0px 2px 6px rgba(0,0,0,0.05)`
+
+---
+
+## **4. Buttons**
+
+### **Primary Button**
+
+* Background: `#1E9B63`
+* Text color: `#FFFFFF`
+* Padding: `14px 24px`
+* Border-radius: `8px`
+* Font-weight: **600**
+
+### **Secondary Button**
+
+* Background: **transparent**
+* Border: `1px solid #1E9B63`
+* Text color: `#1E9B63`
+* Border-radius: `8px`
+
+### **Hover**
+
+* Slightly darker shade of green
+
+---
+
+## **5. Icons**
+
+### **Style**
+
+* Minimal line icons.
+* All icons are **Absher green**.
+* Icon background container is **white circular** with subtle shadow.
+
+### **Sizes**
+
+* Icon container: **64–72px circle**
+* Icon inside: **32–36px**
+
+---
+
+## **6. Cards**
+
+### **Main Service Cards**
+
+* White rectangular cards
+* Rounded corners: **12 px**
+* Padding: **20–24 px**
+* Layout:
+
+  * Top: circular icon
+  * Bottom: green button or label
+* Shadow:
+
+  * `0px 3px 8px rgba(0,0,0,0.05)`
+
+### **Sub-service Cards**
+
+* Smaller
+* Thin icon + text
+* Subtle borders
+* No heavy shadow
+
+---
+
+## **7. Navigation & Header**
+
+### **Top Header**
+
+* White background
+* Icons in green
+* Vertical spacing generous, around **20–24 px**
+* Elements spaced with **32 px** gaps
+
+### **Breadcrumb Menu**
+
+* Light gray background strip
+* Thin border bottom: `#E4E4E4`
+
+---
+
+## **8. Search Bar**
+
+* Very minimal, rectangular shape with soft corners.
+* Background: `#FFFFFF`
+* Border: `1px solid #E4E4E4`
+* Padding: `12px 16px`
+* Search icon on right (for Arabic layout)
+
+---
+
+## **9. Right-side Menu Panel**
+
+* Light gray background: `#F5F6F8`
+* Full height sticky panel
+* Each item:
+
+  * White background
+  * Left-aligned icon
+  * Padding: **20 px**
+  * Border-bottom: `1px solid #E4E4E4`
+
+---
+
+## **10. Badges and Labels**
+
+### **"NEW" label**
+
+* Background: `#E6F5EE`
+* Text color: `#1E9B63`
+* Font size: **12px**
+* Border-radius: **6px**
+* Positioned top-right of card
+
+---
+
+## **11. Footer**
+
+### **Sections**
+
+* Split into 3 columns
+* Background: white
+* Text sizes: **14–15px**
+* Links in green
+* Social media icons are circular gray buttons with black icons inside
+
+---
+
+# ✅ Summary of Absher UI Style
+
+If you want one quick paragraph for your designer:
+
+> “Absher uses a white, clean, government-friendly aesthetic with a strong green primary color (#1E9B63), rounded cards, circular icon containers, medium-weight Arabic typography, large spacing, minimal shadows, and a calm light-gray background (#F5F6F8). The UI is airy, simple, and highly structured with green action buttons and light neutral tones.”
+
+ 
