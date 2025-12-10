@@ -1,17 +1,8 @@
 import { useState, useMemo } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { Link, useLocation } from "wouter";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Skeleton } from "@/components/ui/skeleton";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { Header } from "@/components/Header";
-import { ProgressIndicator } from "@/components/ProgressIndicator";
-import { CountryCard } from "@/components/CountryCard";
-import { TravelerCard } from "@/components/TravelerCard";
-import { Search, ArrowRight, ArrowLeft, AlertTriangle, Users } from "lucide-react";
+import { Search, ArrowLeft, Globe, FileText, Users, Umbrella, Briefcase, GraduationCap, Heart, UserPlus, Check } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest, queryClient } from "@/lib/queryClient";
 import type { Country, VisaType, Traveler } from "@shared/schema";
@@ -87,167 +78,232 @@ export default function Step1() {
     createRequestMutation.mutate();
   };
 
+  const getCountryFlag = (countryId: string) => {
+    return `https://flagcdn.com/w80/${countryId}.png`;
+  };
+
+  const getVisaStatusLabel = (status: string) => {
+    const labels: Record<string, { text: string; class: string }> = {
+      visa_required: { text: "تأشيرة مطلوبة", class: "bg-[#fff3e0] text-[#e65100]" },
+      e_visa: { text: "تأشيرة إلكترونية", class: "bg-[#e3f2fd] text-[#1565c0]" },
+      visa_free: { text: "بدون تأشيرة", class: "bg-[#e8f5e9] text-[#2e7d32]" },
+      not_allowed: { text: "غير مسموح", class: "bg-[#ffebee] text-[#c62828]" },
+    };
+    return labels[status] || labels.visa_required;
+  };
+
+  const getVisaTypeIcon = (id: string) => {
+    const icons: Record<string, any> = {
+      tourist: Umbrella,
+      business: Briefcase,
+      student: GraduationCap,
+      medical: Heart,
+      transit: UserPlus,
+    };
+    return icons[id] || FileText;
+  };
+
+  const getTravelerInitial = (name: string) => {
+    return name.split(' ').map(n => n[0]).join('').substring(0, 1);
+  };
+
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-[#f5f5f5]">
       <Header />
       
-      <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <ProgressIndicator currentStep={1} />
+      <main className="py-8 min-h-[70vh]">
+        <div className="max-w-[1200px] mx-auto px-5">
+          {/* Progress Steps */}
+          <div className="flex justify-center gap-[60px] mb-8 bg-white py-6 px-6 rounded-xl shadow-[0_2px_8px_rgba(0,0,0,0.05)]">
+            <div className="flex items-center gap-3">
+              <div className="w-9 h-9 rounded-full bg-[#00ab67] text-white flex items-center justify-center font-bold">1</div>
+              <div className="font-medium text-[#333]">البيانات الأساسية</div>
+            </div>
+            <div className="flex items-center gap-3">
+              <div className="w-9 h-9 rounded-full bg-[#e0e0e0] text-[#707070] flex items-center justify-center font-bold">2</div>
+              <div className="font-medium text-[#707070]">المتطلبات</div>
+            </div>
+            <div className="flex items-center gap-3">
+              <div className="w-9 h-9 rounded-full bg-[#e0e0e0] text-[#707070] flex items-center justify-center font-bold">3</div>
+              <div className="font-medium text-[#707070]">حجز الموعد</div>
+            </div>
+          </div>
 
-        <div className="mt-8 space-y-8">
-          <Card className="overflow-visible">
-            <CardHeader>
-              <CardTitle className="text-lg" data-testid="title-country-selection">Select Destination Country</CardTitle>
-              <CardDescription>
-                Choose the country you want to travel to
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="relative mb-4">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                <Input
+          {/* Country Selection */}
+          <div className="bg-white rounded-xl shadow-[0_2px_12px_rgba(0,0,0,0.06)] mb-5 overflow-hidden">
+            <div className="bg-gradient-to-br from-[#00ab67] to-[#008550] text-white py-[18px] px-[25px] text-[17px] font-bold flex items-center gap-3">
+              <Globe className="w-5 h-5" />
+              اختر الدولة
+            </div>
+            <div className="p-[25px]">
+              <div className="relative mb-5">
+                <Search className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#707070]" />
+                <input
                   type="search"
-                  placeholder="Search countries..."
+                  placeholder="ابحث عن دولة..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10"
+                  className="w-full pr-11 py-3.5 px-5 border-2 border-[#e0e0e0] rounded-[10px] text-[15px] focus:outline-none focus:border-[#00ab67]"
                   data-testid="input-search-country"
                 />
               </div>
 
               {countriesLoading ? (
-                <div className="space-y-3">
-                  {[1, 2, 3, 4, 5].map((i) => (
-                    <Skeleton key={i} className="h-16 w-full" />
+                <div className="grid grid-cols-[repeat(auto-fill,minmax(260px,1fr))] gap-3">
+                  {[1, 2, 3, 4, 5, 6].map((i) => (
+                    <div key={i} className="h-16 w-full rounded-[10px] bg-[#e0e0e0] animate-pulse" />
                   ))}
                 </div>
               ) : (
-                <ScrollArea className="h-[300px] pr-4">
-                  <div className="space-y-3">
-                    {filteredCountries.map((country) => (
-                      <CountryCard
+                <div className="grid grid-cols-[repeat(auto-fill,minmax(260px,1fr))] gap-3">
+                  {filteredCountries.map((country) => {
+                    const statusInfo = getVisaStatusLabel(country.visaStatus);
+                    return (
+                      <div
                         key={country.id}
-                        country={country}
-                        selected={selectedCountry?.id === country.id}
-                        onSelect={setSelectedCountry}
-                      />
-                    ))}
-                    {filteredCountries.length === 0 && (
-                      <p className="text-center text-muted-foreground py-8" data-testid="text-no-countries">
-                        No countries found matching your search.
-                      </p>
-                    )}
-                  </div>
-                </ScrollArea>
-              )}
-
-              {selectedCountry?.visaStatus === "not_allowed" && (
-                <div className="mt-4 p-4 rounded-lg bg-destructive/10 border border-destructive/20 flex items-start gap-3" data-testid="alert-not-allowed">
-                  <AlertTriangle className="w-5 h-5 text-destructive shrink-0 mt-0.5" />
-                  <div>
-                    <p className="font-medium text-destructive">Travel Not Allowed</p>
-                    <p className="text-sm text-muted-foreground mt-1">
-                      Travel to this destination is currently not allowed for Saudi citizens.
-                    </p>
-                  </div>
+                        onClick={() => setSelectedCountry(country)}
+                        className={`flex items-center gap-3 p-[15px] border-2 rounded-[10px] cursor-pointer transition-all ${
+                          selectedCountry?.id === country.id
+                            ? "border-[#00ab67] bg-[#e8f5e9]"
+                            : "border-[#e0e0e0] hover:border-[#00ab67] hover:bg-[#f8fdf9]"
+                        }`}
+                      >
+                        <img
+                          src={getCountryFlag(country.id)}
+                          alt={country.name}
+                          className="w-9 h-[27px] rounded-[3px] object-cover"
+                        />
+                        <div className="flex-1">
+                          <h4 className="font-semibold text-[15px] mb-[3px]">{country.nameAr}</h4>
+                          <span className={`text-[11px] px-2 py-0.5 rounded-[10px] ${statusInfo.class}`}>
+                            {statusInfo.text}
+                          </span>
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
               )}
-            </CardContent>
-          </Card>
+            </div>
+          </div>
 
-          <Card className="overflow-visible">
-            <CardHeader>
-              <CardTitle className="text-lg" data-testid="title-visa-type">Visa Type</CardTitle>
-              <CardDescription>
-                Select the type of visa you are applying for
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
+          {/* Visa Type Selection */}
+          <div className="bg-white rounded-xl shadow-[0_2px_12px_rgba(0,0,0,0.06)] mb-5 overflow-hidden">
+            <div className="bg-gradient-to-br from-[#00ab67] to-[#008550] text-white py-[18px] px-[25px] text-[17px] font-bold flex items-center gap-3">
+              <FileText className="w-5 h-5" />
+              نوع التأشيرة
+            </div>
+            <div className="p-[25px]">
               {visaTypesLoading ? (
-                <Skeleton className="h-10 w-full" />
+                <div className="flex gap-3 flex-wrap">
+                  {[1, 2, 3, 4, 5].map((i) => (
+                    <div key={i} className="h-10 w-24 rounded-lg bg-[#e0e0e0] animate-pulse" />
+                  ))}
+                </div>
               ) : (
-                <Select value={selectedVisaType} onValueChange={setSelectedVisaType}>
-                  <SelectTrigger data-testid="select-visa-type">
-                    <SelectValue placeholder="Select visa type" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {visaTypes?.map((type) => (
-                      <SelectItem key={type.id} value={type.id} data-testid={`option-visa-${type.id}`}>
-                        {type.name}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
+                <div className="flex gap-3 flex-wrap">
+                  {visaTypes?.map((type) => {
+                    const Icon = getVisaTypeIcon(type.id);
+                    return (
+                      <button
+                        key={type.id}
+                        onClick={() => setSelectedVisaType(type.id)}
+                        className={`py-2.5 px-5 border-2 rounded-lg cursor-pointer font-medium flex items-center gap-2 transition-all ${
+                          selectedVisaType === type.id
+                            ? "bg-[#00ab67] border-[#00ab67] text-white"
+                            : "bg-white border-[#e0e0e0] text-[#333] hover:border-[#00ab67]"
+                        }`}
+                        data-testid={`option-visa-${type.id}`}
+                      >
+                        <Icon className={`w-4 h-4 ${selectedVisaType === type.id ? "text-white" : "text-[#333]"}`} />
+                        {type.nameAr}
+                      </button>
+                    );
+                  })}
+                </div>
               )}
-            </CardContent>
-          </Card>
+            </div>
+          </div>
 
-          <Card className="overflow-visible">
-            <CardHeader>
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-                  <Users className="w-5 h-5 text-primary" />
-                </div>
-                <div>
-                  <CardTitle className="text-lg" data-testid="title-travelers">Who is traveling?</CardTitle>
-                  <CardDescription>
-                    Select yourself and any family members
-                  </CardDescription>
-                </div>
-              </div>
-            </CardHeader>
-            <CardContent>
+          {/* Travelers Selection */}
+          <div className="bg-white rounded-xl shadow-[0_2px_12px_rgba(0,0,0,0.06)] mb-5 overflow-hidden">
+            <div className="bg-gradient-to-br from-[#00ab67] to-[#008550] text-white py-[18px] px-[25px] text-[17px] font-bold flex items-center gap-3">
+              <Users className="w-5 h-5" />
+              المسافرون
+            </div>
+            <div className="p-[25px]">
               {travelersLoading ? (
-                <div className="space-y-3">
+                <div className="space-y-2.5">
                   {[1, 2, 3].map((i) => (
-                    <Skeleton key={i} className="h-20 w-full" />
+                    <div key={i} className="h-20 w-full rounded-[10px] bg-[#e0e0e0] animate-pulse" />
                   ))}
                 </div>
               ) : (
-                <div className="space-y-3">
-                  {travelers?.map((traveler) => (
-                    <TravelerCard
-                      key={traveler.id}
-                      traveler={traveler}
-                      selected={selectedTravelers.has(traveler.id)}
-                      onToggle={toggleTraveler}
-                    />
-                  ))}
+                <div>
+                  {travelers?.map((traveler) => {
+                    const isSelected = selectedTravelers.has(traveler.id);
+                    return (
+                      <div
+                        key={traveler.id}
+                        onClick={() => toggleTraveler(traveler.id)}
+                        className={`flex items-center justify-between p-[15px] border-2 rounded-[10px] cursor-pointer transition-all mb-2.5 last:mb-0 ${
+                          isSelected
+                            ? "border-[#00ab67] bg-[#f8fdf9]"
+                            : "border-[#e0e0e0]"
+                        }`}
+                      >
+                        <div className="flex items-center gap-3">
+                          <div className="w-11 h-11 rounded-full bg-gradient-to-br from-[#00cc7b] to-[#00ab67] flex items-center justify-center text-white font-bold">
+                            {getTravelerInitial(traveler.nameAr)}
+                          </div>
+                          <div>
+                            <h4 className="font-semibold mb-[3px]">{traveler.nameAr}</h4>
+                            <span className="text-[13px] text-[#707070]">
+                              {traveler.relationshipAr} • {traveler.idNumber}
+                            </span>
+                          </div>
+                        </div>
+                        <div className={`w-[22px] h-[22px] border-2 rounded flex items-center justify-center ${
+                          isSelected
+                            ? "bg-[#00ab67] border-[#00ab67] text-white"
+                            : "border-[#e0e0e0]"
+                        }`}>
+                          {isSelected && <Check className="w-3.5 h-3.5" />}
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
               )}
+            </div>
+          </div>
 
-              <Button 
-                variant="ghost" 
-                className="mt-4 text-primary"
-                data-testid="button-add-dependent"
-              >
-                + Add new dependent
-              </Button>
-            </CardContent>
-          </Card>
-
-          <div className="flex items-center justify-between gap-4 pt-4">
+          {/* Actions */}
+          <div className="flex items-center justify-between mt-6 pt-5 border-t border-[#e0e0e0]">
             <Link href="/">
-              <Button variant="outline" data-testid="button-back">
-                <ArrowLeft className="w-4 h-4 mr-2" />
-                Back
-              </Button>
+              <button
+                className="border-2 border-[#00ab67] text-[#00ab67] bg-transparent hover:bg-[#00ab67] hover:text-white py-3.5 px-7 rounded-lg text-[15px] font-semibold cursor-pointer transition-all"
+                data-testid="button-back"
+              >
+                رجوع
+              </button>
             </Link>
             
-            <Button 
+            <button
               onClick={handleContinue}
               disabled={!canContinue || createRequestMutation.isPending}
+              className="bg-[#00ab67] hover:bg-[#008550] disabled:opacity-50 disabled:cursor-not-allowed text-white py-3.5 px-7 rounded-lg text-[15px] font-semibold inline-flex items-center gap-2.5 cursor-pointer transition-all"
               data-testid="button-continue"
             >
               {createRequestMutation.isPending ? (
-                "Processing..."
+                "جاري المعالجة..."
               ) : (
                 <>
-                  Continue - Check Requirements
-                  <ArrowRight className="w-4 h-4 ml-2" />
+                  التالي
+                  <ArrowLeft className="w-4 h-4" />
                 </>
               )}
-            </Button>
+            </button>
           </div>
         </div>
       </main>

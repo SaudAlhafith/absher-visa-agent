@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أبشر - مساعد التأشيرات</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root { --g: #00ab67; --gd: #008550; --gl: #00cc7b; --bg: #f5f5f5; --gr: #707070; --d: #333; --b: #e0e0e0; --s: #51a041; --w: #f7941d; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Tajawal', sans-serif; background: var(--bg); color: var(--d); line-height: 1.6; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .header-top { background: #fff; padding: 10px 0; border-bottom: 3px solid var(--g); }
+        .header-content { display: flex; justify-content: space-between; align-items: center; }
+        .logo { display: flex; align-items: center; gap: 20px; }
+        .logo img { height: 50px; }
+        .logo-divider { width: 1px; height: 40px; background: var(--b); }
+        .user-info { display: flex; align-items: center; gap: 15px; }
+        .user-avatar { width: 45px; height: 45px; border-radius: 50%; background: linear-gradient(135deg, var(--gl), var(--g)); display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 700; }
+        .nav-bar { background: var(--g); padding: 12px 0; }
+        .nav-links { display: flex; gap: 25px; list-style: none; }
+        .nav-links a { color: #fff; text-decoration: none; padding: 8px 16px; border-radius: 6px; display: flex; align-items: center; gap: 8px; }
+        .nav-links a:hover, .nav-links a.active { background: rgba(255,255,255,0.2); }
+        .breadcrumb { background: #fff; padding: 15px 0; border-bottom: 1px solid var(--b); }
+        .breadcrumb-list { display: flex; gap: 10px; list-style: none; font-size: 14px; }
+        .breadcrumb-list li::after { content: '/'; margin-right: 10px; color: var(--gr); }
+        .breadcrumb-list li:last-child::after { content: ''; }
+        .breadcrumb-list a { color: var(--g); text-decoration: none; }
+        .main-content { padding: 30px 0; min-height: 70vh; }
+        .page { display: none; }
+        .page.active { display: block; animation: fadeIn 0.3s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .progress-steps { display: flex; justify-content: center; gap: 60px; margin-bottom: 30px; background: #fff; padding: 25px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+        .step { display: flex; align-items: center; gap: 12px; }
+        .step-number { width: 36px; height: 36px; border-radius: 50%; background: var(--b); display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--gr); }
+        .step.active .step-number, .step.completed .step-number { background: var(--g); color: #fff; }
+        .step-label { font-weight: 500; color: var(--gr); }
+        .step.active .step-label { color: var(--d); }
+        .card { background: #fff; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); margin-bottom: 20px; overflow: hidden; }
+        .card-header { background: linear-gradient(135deg, var(--g), var(--gd)); color: #fff; padding: 18px 25px; font-size: 17px; font-weight: 700; display: flex; align-items: center; gap: 12px; }
+        .card-body { padding: 25px; }
+        .hero-section { background: linear-gradient(135deg, var(--g), var(--gd)); color: #fff; padding: 50px 40px; border-radius: 16px; text-align: center; margin-bottom: 30px; }
+        .hero-icon { width: 80px; height: 80px; background: rgba(255,255,255,0.15); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 36px; }
+        .hero-title { font-size: 32px; font-weight: 800; margin-bottom: 12px; }
+        .hero-description { font-size: 17px; opacity: 0.95; max-width: 550px; margin: 0 auto 25px; }
+        .btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 28px; border-radius: 8px; font-size: 15px; font-weight: 600; cursor: pointer; border: none; font-family: 'Tajawal'; transition: all 0.3s; }
+        .btn-primary { background: #fff; color: var(--g); }
+        .btn-green { background: var(--g); color: #fff; }
+        .btn-green:hover { background: var(--gd); }
+        .btn-outline { background: transparent; border: 2px solid var(--g); color: var(--g); }
+        .btn-outline:hover { background: var(--g); color: #fff; }
+        .section-title { font-size: 20px; font-weight: 700; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+        .request-item { display: flex; align-items: center; justify-content: space-between; padding: 18px; border-bottom: 1px solid var(--b); }
+        .request-item:last-child { border-bottom: none; }
+        .request-info { display: flex; align-items: center; gap: 15px; }
+        .country-flag { width: 48px; height: 36px; border-radius: 4px; object-fit: cover; box-shadow: 0 2px 6px rgba(0,0,0,0.15); }
+        .request-details h4 { font-weight: 600; margin-bottom: 3px; }
+        .request-details span { font-size: 13px; color: var(--gr); }
+        .status-badge { padding: 5px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; display: inline-flex; align-items: center; gap: 5px; }
+        .status-completed { background: #e8f5e9; color: var(--s); }
+        .status-draft { background: #fff3e0; color: var(--w); }
+        .search-box { position: relative; margin-bottom: 20px; }
+        .search-input { width: 100%; padding: 14px 20px 14px 45px; border: 2px solid var(--b); border-radius: 10px; font-size: 15px; font-family: 'Tajawal'; }
+        .search-input:focus { outline: none; border-color: var(--g); }
+        .search-icon { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: var(--gr); }
+        .countries-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+        .country-card { display: flex; align-items: center; gap: 12px; padding: 15px; border: 2px solid var(--b); border-radius: 10px; cursor: pointer; transition: all 0.2s; }
+        .country-card:hover { border-color: var(--g); background: #f8fdf9; }
+        .country-card.selected { border-color: var(--g); background: #e8f5e9; }
+        .country-flag-sm { width: 36px; height: 27px; border-radius: 3px; object-fit: cover; }
+        .country-info h4 { font-weight: 600; font-size: 15px; margin-bottom: 3px; }
+        .visa-status { font-size: 11px; padding: 3px 8px; border-radius: 10px; }
+        .visa-required { background: #fff3e0; color: #e65100; }
+        .visa-evisa { background: #e3f2fd; color: #1565c0; }
+        .visa-free { background: #e8f5e9; color: #2e7d32; }
+        .visa-types { display: flex; gap: 12px; flex-wrap: wrap; }
+        .visa-type-btn { padding: 10px 20px; border: 2px solid var(--b); border-radius: 8px; background: #fff; cursor: pointer; font-family: 'Tajawal'; font-weight: 500; display: flex; align-items: center; gap: 8px; transition: all 0.2s; }
+        .visa-type-btn:hover { border-color: var(--g); }
+        .visa-type-btn.selected { background: var(--g); border-color: var(--g); color: #fff; }
+        .traveler-item { display: flex; align-items: center; justify-content: space-between; padding: 15px; border: 2px solid var(--b); border-radius: 10px; margin-bottom: 10px; cursor: pointer; transition: all 0.2s; }
+        .traveler-item.selected { border-color: var(--g); background: #f8fdf9; }
+        .traveler-info { display: flex; align-items: center; gap: 12px; }
+        .traveler-avatar { width: 45px; height: 45px; border-radius: 50%; background: linear-gradient(135deg, var(--gl), var(--g)); display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 700; }
+        .checkbox-custom { width: 22px; height: 22px; border: 2px solid var(--b); border-radius: 5px; display: flex; align-items: center; justify-content: center; color: transparent; }
+        .traveler-item.selected .checkbox-custom { background: var(--g); border-color: var(--g); color: #fff; }
+        .traveler-req-card { border: 2px solid var(--b); border-radius: 12px; margin-bottom: 20px; overflow: hidden; }
+        .traveler-req-header { background: #f8f9fa; padding: 18px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--b); }
+        .traveler-req-info { display: flex; align-items: center; gap: 12px; }
+        .traveler-req-status { display: flex; align-items: center; gap: 6px; font-weight: 600; font-size: 14px; }
+        .traveler-req-status.complete { color: var(--s); }
+        .traveler-req-status.incomplete { color: var(--w); }
+        .traveler-req-body { padding: 18px; }
+        .req-section { margin-bottom: 18px; }
+        .req-section:last-child { margin-bottom: 0; }
+        .req-section-title { font-weight: 600; font-size: 14px; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+        .req-section-title.available { color: var(--s); }
+        .req-section-title.needed { color: var(--w); }
+        .req-items { display: grid; gap: 8px; }
+        .req-item { display: flex; align-items: center; gap: 10px; padding: 10px 12px; background: #f8f9fa; border-radius: 6px; font-size: 14px; }
+        .req-item.available i { color: var(--s); }
+        .req-item.needed i { color: var(--w); }
+        .appointment-options { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-bottom: 25px; }
+        .appointment-option { padding: 20px; border: 2px solid var(--b); border-radius: 12px; cursor: pointer; text-align: center; transition: all 0.2s; }
+        .appointment-option:hover { border-color: var(--g); }
+        .appointment-option.selected { border-color: var(--g); background: #f8fdf9; }
+        .appointment-option-icon { width: 50px; height: 50px; background: var(--bg); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; font-size: 22px; color: var(--g); }
+        .date-picker { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; margin-top: 15px; }
+        .date-item { padding: 10px; text-align: center; border: 1px solid var(--b); border-radius: 6px; cursor: pointer; font-size: 14px; }
+        .date-item.selected { background: var(--g); border-color: var(--g); color: #fff; }
+        .date-item.disabled { background: #f5f5f5; color: #bbb; cursor: not-allowed; }
+        .time-slots { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 15px; }
+        .time-slot { padding: 8px 16px; border: 2px solid var(--b); border-radius: 6px; cursor: pointer; font-size: 14px; }
+        .time-slot.selected { background: var(--g); border-color: var(--g); color: #fff; }
+        .summary-card { background: linear-gradient(135deg, #f8fdf9, #e8f5e9); border: 2px solid var(--g); border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+        .summary-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid rgba(0,171,103,0.2); }
+        .summary-row:last-child { border-bottom: none; }
+        .summary-label { color: var(--gr); font-size: 14px; }
+        .summary-value { font-weight: 600; display: flex; align-items: center; gap: 8px; font-size: 14px; }
+        .success-state { text-align: center; padding: 50px 20px; }
+        .success-icon { width: 90px; height: 90px; border-radius: 50%; background: linear-gradient(135deg, var(--gl), var(--g)); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 42px; color: #fff; }
+        .success-title { font-size: 26px; font-weight: 700; color: var(--g); margin-bottom: 8px; }
+        .actions { display: flex; justify-content: space-between; margin-top: 25px; padding-top: 20px; border-top: 1px solid var(--b); }
+        .actions-center { display: flex; justify-content: center; gap: 12px; }
+        .info-box { background: #e3f2fd; border-right: 4px solid #247cd6; padding: 12px 15px; border-radius: 6px; margin-top: 15px; display: flex; align-items: center; gap: 10px; font-size: 14px; color: #1565c0; }
+        .footer { background: #fff; border-top: 4px solid var(--g); padding: 25px 0; margin-top: 30px; }
+        .footer-content { display: flex; justify-content: space-between; align-items: center; }
+        .footer-links { display: flex; gap: 20px; }
+        .footer-links a { color: var(--gr); text-decoration: none; font-size: 13px; }
+        .footer-links a:hover { color: var(--g); }
+        .footer-copyright { text-align: center; margin-top: 15px; padding-top: 15px; border-top: 1px solid var(--b); color: var(--gr); font-size: 12px; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-top">
+            <div class="container">
+                <div class="header-content">
+                    <div class="logo">
+                        <img src="Absher_indvidual_logo.svg" alt="أبشر">
+                        <div class="logo-divider"></div>
+                        <img src="vission-logo.png" alt="رؤية 2030">
+                    </div>
+                    <div class="user-info">
+                        <div style="text-align: left;">
+                            <div style="font-weight: 600;">محمد أحمد الغامدي</div>
+                            <div style="font-size: 13px; color: var(--gr);">1088******</div>
+                        </div>
+                        <div class="user-avatar">م</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <nav class="nav-bar">
+            <div class="container">
+                <ul class="nav-links">
+                    <li><a href="#"><i class="fas fa-home"></i> الرئيسية</a></li>
+                    <li><a href="#"><i class="fas fa-list-alt"></i> خدماتي</a></li>
+                    <li><a href="#" class="active"><i class="fas fa-passport"></i> مساعد التأشيرات</a></li>
+                    <li><a href="#"><i class="fas fa-calendar-alt"></i> المواعيد</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <div class="breadcrumb"><div class="container"><ul class="breadcrumb-list"><li><a href="#">الرئيسية</a></li><li><a href="#">الخدمات</a></li><li><span id="page-title">مساعد التأشيرات</span></li></ul></div></div>
+    
+    <main class="main-content">
+        <div class="container">
+            <!-- Page 1 -->
+            <div class="page active" id="page-1">
+                <div class="hero-section">
+                    <div class="hero-icon"><i class="fas fa-passport"></i></div>
+                    <h1 class="hero-title">مساعد تجهيز التأشيرات</h1>
+                    <p class="hero-description">نجهز لك كل متطلبات التأشيرة ومستندات السفارة باستخدام بياناتك الحكومية المتوفرة</p>
+                    <button class="btn btn-primary" onclick="goTo(2)"><i class="fas fa-plus-circle"></i> بدء طلب تأشيرة جديد</button>
+                </div>
+                <h2 class="section-title"><i class="fas fa-history" style="color: var(--g);"></i> طلباتك السابقة</h2>
+                <div class="card"><div class="card-body">
+                    <div class="request-item">
+                        <div class="request-info">
+                            <img src="https://flagcdn.com/w80/fr.png" alt="فرنسا" class="country-flag">
+                            <div class="request-details"><h4>فرنسا - تأشيرة سياحية</h4><span>15 نوفمبر 2025 • 3 مسافرين</span></div>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 12px;">
+                            <span class="status-badge status-completed"><i class="fas fa-check-circle"></i> مكتمل</span>
+                            <button class="btn btn-outline" style="padding: 8px 14px; font-size: 13px;"><i class="fas fa-file-pdf"></i> الملفات</button>
+                        </div>
+                    </div>
+                    <div class="request-item">
+                        <div class="request-info">
+                            <img src="https://flagcdn.com/w80/gb.png" alt="بريطانيا" class="country-flag">
+                            <div class="request-details"><h4>المملكة المتحدة - تأشيرة سياحية</h4><span>28 أكتوبر 2025 • مسافر واحد</span></div>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 12px;">
+                            <span class="status-badge status-draft"><i class="fas fa-edit"></i> مسودة</span>
+                            <button class="btn btn-outline" style="padding: 8px 14px; font-size: 13px;"><i class="fas fa-arrow-left"></i> متابعة</button>
+                        </div>
+                    </div>
+                </div></div>
+            </div>
+
+            <!-- Page 2 -->
+            <div class="page" id="page-2">
+                <div class="progress-steps">
+                    <div class="step active"><div class="step-number">1</div><div class="step-label">البيانات الأساسية</div></div>
+                    <div class="step"><div class="step-number">2</div><div class="step-label">المتطلبات</div></div>
+                    <div class="step"><div class="step-number">3</div><div class="step-label">حجز الموعد</div></div>
+                </div>
+                <div class="card"><div class="card-header"><i class="fas fa-globe"></i> اختر الدولة</div><div class="card-body">
+                    <div class="search-box"><i class="fas fa-search search-icon"></i><input type="text" class="search-input" placeholder="ابحث عن دولة..."></div>
+                    <div class="countries-grid">
+                        <div class="country-card selected" onclick="selectCountry(this)"><img src="https://flagcdn.com/w80/fr.png" class="country-flag-sm"><div class="country-info"><h4>فرنسا</h4><span class="visa-status visa-required">تأشيرة مطلوبة</span></div></div>
+                        <div class="country-card" onclick="selectCountry(this)"><img src="https://flagcdn.com/w80/gb.png" class="country-flag-sm"><div class="country-info"><h4>المملكة المتحدة</h4><span class="visa-status visa-required">تأشيرة مطلوبة</span></div></div>
+                        <div class="country-card" onclick="selectCountry(this)"><img src="https://flagcdn.com/w80/us.png" class="country-flag-sm"><div class="country-info"><h4>الولايات المتحدة</h4><span class="visa-status visa-required">تأشيرة مطلوبة</span></div></div>
+                        <div class="country-card" onclick="selectCountry(this)"><img src="https://flagcdn.com/w80/tr.png" class="country-flag-sm"><div class="country-info"><h4>تركيا</h4><span class="visa-status visa-evisa">تأشيرة إلكترونية</span></div></div>
+                        <div class="country-card" onclick="selectCountry(this)"><img src="https://flagcdn.com/w80/my.png" class="country-flag-sm"><div class="country-info"><h4>ماليزيا</h4><span class="visa-status visa-free">بدون تأشيرة</span></div></div>
+                        <div class="country-card" onclick="selectCountry(this)"><img src="https://flagcdn.com/w80/jp.png" class="country-flag-sm"><div class="country-info"><h4>اليابان</h4><span class="visa-status visa-required">تأشيرة مطلوبة</span></div></div>
+                    </div>
+                </div></div>
+                <div class="card"><div class="card-header"><i class="fas fa-file-alt"></i> نوع التأشيرة</div><div class="card-body">
+                    <div class="visa-types">
+                        <button class="visa-type-btn selected" onclick="selectVisa(this)"><i class="fas fa-umbrella-beach"></i> سياحية</button>
+                        <button class="visa-type-btn" onclick="selectVisa(this)"><i class="fas fa-briefcase"></i> عمل</button>
+                        <button class="visa-type-btn" onclick="selectVisa(this)"><i class="fas fa-graduation-cap"></i> دراسية</button>
+                        <button class="visa-type-btn" onclick="selectVisa(this)"><i class="fas fa-heartbeat"></i> علاجية</button>
+                        <button class="visa-type-btn" onclick="selectVisa(this)"><i class="fas fa-users"></i> زيارة عائلية</button>
+                    </div>
+                </div></div>
+                <div class="card"><div class="card-header"><i class="fas fa-user-friends"></i> المسافرون</div><div class="card-body">
+                    <div class="traveler-item selected" onclick="toggleTraveler(this)"><div class="traveler-info"><div class="traveler-avatar">م</div><div><h4 style="font-weight: 600; margin-bottom: 3px;">محمد أحمد الغامدي</h4><span style="font-size: 13px; color: var(--gr);">رب الأسرة • 1088******</span></div></div><div class="checkbox-custom"><i class="fas fa-check"></i></div></div>
+                    <div class="traveler-item selected" onclick="toggleTraveler(this)"><div class="traveler-info"><div class="traveler-avatar">ن</div><div><h4 style="font-weight: 600; margin-bottom: 3px;">نورة محمد الغامدي</h4><span style="font-size: 13px; color: var(--gr);">زوجة • 1099******</span></div></div><div class="checkbox-custom"><i class="fas fa-check"></i></div></div>
+                    <div class="traveler-item" onclick="toggleTraveler(this)"><div class="traveler-info"><div class="traveler-avatar">س</div><div><h4 style="font-weight: 600; margin-bottom: 3px;">سلمان محمد الغامدي</h4><span style="font-size: 13px; color: var(--gr);">ابن • 1122******</span></div></div><div class="checkbox-custom"><i class="fas fa-check"></i></div></div>
+                </div></div>
+                <div class="actions"><button class="btn btn-outline" onclick="goTo(1)">رجوع</button><button class="btn btn-green" onclick="goTo(3)">التالي <i class="fas fa-arrow-left"></i></button></div>
+            </div>
+
+            <!-- Page 3 -->
+            <div class="page" id="page-3">
+                <div class="progress-steps">
+                    <div class="step completed"><div class="step-number"><i class="fas fa-check"></i></div><div class="step-label">البيانات الأساسية</div></div>
+                    <div class="step active"><div class="step-number">2</div><div class="step-label">المتطلبات</div></div>
+                    <div class="step"><div class="step-number">3</div><div class="step-label">حجز الموعد</div></div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-row"><span class="summary-label">الوجهة</span><span class="summary-value"><img src="https://flagcdn.com/w40/fr.png" style="width:24px; height:18px; border-radius:2px;"> فرنسا - تأشيرة سياحية</span></div>
+                    <div class="summary-row"><span class="summary-label">المسافرون</span><span class="summary-value">محمد الغامدي، نورة الغامدي</span></div>
+                </div>
+
+                <!-- محمد -->
+                <div class="traveler-req-card">
+                    <div class="traveler-req-header">
+                        <div class="traveler-req-info"><div class="traveler-avatar" style="width:40px;height:40px;">م</div><div><h4 style="font-weight:600;">محمد أحمد الغامدي</h4><span style="font-size:13px;color:var(--gr);">رب الأسرة</span></div></div>
+                        <div class="traveler-req-status complete"><i class="fas fa-check-circle"></i> جاهز</div>
+                    </div>
+                    <div class="traveler-req-body">
+                        <div class="req-section">
+                            <div class="req-section-title available"><i class="fas fa-check-circle"></i> مستندات متوفرة من أبشر</div>
+                            <div class="req-items">
+                                <div class="req-item available"><i class="fas fa-check-circle"></i> جواز سفر ساري (ينتهي: 2028)</div>
+                                <div class="req-item available"><i class="fas fa-check-circle"></i> صورة شخصية</div>
+                                <div class="req-item available"><i class="fas fa-check-circle"></i> بيانات الهوية الوطنية</div>
+                                <div class="req-item available"><i class="fas fa-check-circle"></i> تأمين سفر</div>
+                            </div>
+                        </div>
+                        <button class="btn btn-outline" style="width:100%; margin-top:15px;"><i class="fas fa-file-pdf"></i> معاينة ملف PDF</button>
+                    </div>
+                </div>
+
+                <!-- نورة -->
+                <div class="traveler-req-card">
+                    <div class="traveler-req-header">
+                        <div class="traveler-req-info"><div class="traveler-avatar" style="width:40px;height:40px;">ن</div><div><h4 style="font-weight:600;">نورة محمد الغامدي</h4><span style="font-size:13px;color:var(--gr);">زوجة</span></div></div>
+                        <div class="traveler-req-status incomplete"><i class="fas fa-exclamation-circle"></i> ينقص 2 مستند</div>
+                    </div>
+                    <div class="traveler-req-body">
+                        <div class="req-section">
+                            <div class="req-section-title available"><i class="fas fa-check-circle"></i> مستندات متوفرة</div>
+                            <div class="req-items">
+                                <div class="req-item available"><i class="fas fa-check-circle"></i> جواز سفر ساري (ينتهي: 2027)</div>
+                                <div class="req-item available"><i class="fas fa-check-circle"></i> بيانات الهوية الوطنية</div>
+                            </div>
+                        </div>
+                        <div class="req-section">
+                            <div class="req-section-title needed"><i class="fas fa-exclamation-circle"></i> مستندات مطلوب توفيرها</div>
+                            <div class="req-items">
+                                <div class="req-item needed"><i class="fas fa-exclamation-circle"></i> صورة شخصية حديثة</div>
+                                <div class="req-item needed"><i class="fas fa-exclamation-circle"></i> تأمين سفر</div>
+                            </div>
+                        </div>
+                        <button class="btn btn-outline" style="width:100%; margin-top:15px;"><i class="fas fa-file-pdf"></i> معاينة ملف PDF</button>
+                    </div>
+                </div>
+
+                <div class="info-box"><i class="fas fa-info-circle"></i> جميع البيانات مستخرجة من سجلاتك الحكومية في أبشر</div>
+                <div class="actions"><button class="btn btn-outline" onclick="goTo(2)">رجوع</button><button class="btn btn-green" onclick="goTo(4)">حجز الموعد <i class="fas fa-arrow-left"></i></button></div>
+            </div>
+
+            <!-- Page 4 -->
+            <div class="page" id="page-4">
+                <div class="progress-steps">
+                    <div class="step completed"><div class="step-number"><i class="fas fa-check"></i></div><div class="step-label">البيانات</div></div>
+                    <div class="step completed"><div class="step-number"><i class="fas fa-check"></i></div><div class="step-label">المتطلبات</div></div>
+                    <div class="step active"><div class="step-number">3</div><div class="step-label">حجز الموعد</div></div>
+                </div>
+                <div class="card"><div class="card-header"><i class="fas fa-calendar-check"></i> حجز موعد السفارة</div><div class="card-body">
+                    <div class="appointment-options">
+                        <div class="appointment-option selected" onclick="selectAppt(this)"><div class="appointment-option-icon"><i class="fas fa-calendar-alt"></i></div><h4>حجز مباشر</h4><p style="font-size:13px;color:var(--gr);">احجز من هنا</p></div>
+                        <div class="appointment-option" onclick="selectAppt(this)"><div class="appointment-option-icon"><i class="fas fa-external-link-alt"></i></div><h4>موقع السفارة</h4><p style="font-size:13px;color:var(--gr);">انتقل للموقع</p></div>
+                    </div>
+                    <h4 style="margin-bottom:10px;"><i class="fas fa-building" style="color:var(--g);"></i> السفارة الفرنسية - الرياض</h4>
+                    <p style="font-size:13px;color:var(--gr);margin-bottom:15px;">اختر التاريخ والوقت المناسب</p>
+                    <div class="date-picker">
+                        <div class="date-item disabled"><small>الأحد</small><div>1</div></div>
+                        <div class="date-item disabled"><small>الإثنين</small><div>2</div></div>
+                        <div class="date-item" onclick="selectDate(this)"><small>الثلاثاء</small><div>3</div></div>
+                        <div class="date-item selected" onclick="selectDate(this)"><small>الأربعاء</small><div>4</div></div>
+                        <div class="date-item" onclick="selectDate(this)"><small>الخميس</small><div>5</div></div>
+                        <div class="date-item disabled"><small>الجمعة</small><div>6</div></div>
+                        <div class="date-item disabled"><small>السبت</small><div>7</div></div>
+                    </div>
+                    <div class="time-slots">
+                        <div class="time-slot" onclick="selectTime(this)">09:00 ص</div>
+                        <div class="time-slot" onclick="selectTime(this)">09:30 ص</div>
+                        <div class="time-slot selected" onclick="selectTime(this)">10:00 ص</div>
+                        <div class="time-slot" onclick="selectTime(this)">10:30 ص</div>
+                        <div class="time-slot" onclick="selectTime(this)">11:00 ص</div>
+                    </div>
+                </div></div>
+                <div class="summary-card">
+                    <div class="summary-row"><span class="summary-label">الوجهة</span><span class="summary-value"><img src="https://flagcdn.com/w40/fr.png" style="width:20px;height:15px;border-radius:2px;"> فرنسا</span></div>
+                    <div class="summary-row"><span class="summary-label">الموعد</span><span class="summary-value">الأربعاء 4 ديسمبر - 10:00 ص</span></div>
+                    <div class="summary-row"><span class="summary-label">المكان</span><span class="summary-value">السفارة الفرنسية - الرياض</span></div>
+                </div>
+                <div class="info-box"><i class="fas fa-print"></i> ملف المستندات جاهز للطباعة. أحضره معك للموعد.</div>
+                <div class="actions"><button class="btn btn-outline" onclick="goTo(3)">رجوع</button><button class="btn btn-green" onclick="goTo(5)">تأكيد وإنهاء <i class="fas fa-check"></i></button></div>
+            </div>
+
+            <!-- Page 5: Success -->
+            <div class="page" id="page-5">
+                <div class="card"><div class="card-body">
+                    <div class="success-state">
+                        <div class="success-icon"><i class="fas fa-check"></i></div>
+                        <h2 class="success-title">تم إكمال تجهيز التأشيرة!</h2>
+                        <p style="color:var(--gr);margin-bottom:25px;">تم حجز موعدك وملف المستندات جاهز</p>
+                        <div class="summary-card" style="text-align:right;max-width:400px;margin:0 auto 25px;">
+                            <div class="summary-row"><span class="summary-label">رقم الطلب</span><span class="summary-value">#VIS-2025-78432</span></div>
+                            <div class="summary-row"><span class="summary-label">الوجهة</span><span class="summary-value"><img src="https://flagcdn.com/w40/fr.png" style="width:20px;height:15px;border-radius:2px;"> فرنسا</span></div>
+                            <div class="summary-row"><span class="summary-label">الموعد</span><span class="summary-value">4 ديسمبر 2025 - 10:00 ص</span></div>
+                        </div>
+                        <div class="actions-center">
+                            <button class="btn btn-green"><i class="fas fa-download"></i> تحميل PDF</button>
+                            <button class="btn btn-outline" onclick="goTo(1)">العودة للرئيسية</button>
+                        </div>
+                    </div>
+                </div></div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer"><div class="container">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#"><i class="fas fa-file-contract"></i> الشروط</a>
+                <a href="#"><i class="fas fa-shield-alt"></i> الخصوصية</a>
+                <a href="#"><i class="fas fa-question-circle"></i> المساعدة</a>
+                <a href="#"><i class="fas fa-envelope"></i> تواصل معنا</a>
+            </div>
+        </div>
+        <div class="footer-copyright">© 2025 وزارة الداخلية - المملكة العربية السعودية</div>
+    </div></footer>
+
+    <script>
+        function goTo(n) { document.querySelectorAll('.page').forEach(p => p.classList.remove('active')); document.getElementById('page-'+n).classList.add('active'); window.scrollTo({top:0,behavior:'smooth'}); }
+        function selectCountry(el) { document.querySelectorAll('.country-card').forEach(c => c.classList.remove('selected')); el.classList.add('selected'); }
+        function selectVisa(el) { document.querySelectorAll('.visa-type-btn').forEach(b => b.classList.remove('selected')); el.classList.add('selected'); }
+        function toggleTraveler(el) { el.classList.toggle('selected'); }
+        function selectAppt(el) { document.querySelectorAll('.appointment-option').forEach(o => o.classList.remove('selected')); el.classList.add('selected'); }
+        function selectDate(el) { if(el.classList.contains('disabled')) return; document.querySelectorAll('.date-item').forEach(d => d.classList.remove('selected')); el.classList.add('selected'); }
+        function selectTime(el) { document.querySelectorAll('.time-slot').forEach(t => t.classList.remove('selected')); el.classList.add('selected'); }
+    </script>
+</body>
+</html>

@@ -4,9 +4,9 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Header } from "@/components/Header";
-import { CheckCircle, Download, Home, Calendar, MapPin, Users } from "lucide-react";
+import { Check, Download } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import type { VisaRequest } from "@shared/schema";
+import type { VisaRequest, Country } from "@shared/schema";
 
 export default function Success() {
   const search = useSearch();
@@ -18,6 +18,11 @@ export default function Success() {
   const { data: request, isLoading } = useQuery<VisaRequest>({
     queryKey: ["/api/requests", requestId],
     enabled: !!requestId,
+  });
+
+  const { data: country } = useQuery<Country>({
+    queryKey: ["/api/countries", request?.countryId],
+    enabled: !!request?.countryId,
   });
 
   const handleDownload = () => {
@@ -45,105 +50,105 @@ export default function Success() {
     );
   }
 
+  const getCountryFlag = (countryId: string) => {
+    return `https://flagcdn.com/w40/${countryId}.png`;
+  };
+
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('ar-SA', { 
+      year: 'numeric', 
+      month: 'long', 
+      day: 'numeric' 
+    });
+  };
+
+  const formatTime = (timeString: string) => {
+    return timeString.replace('AM', 'ص').replace('PM', 'م');
+  };
+
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-[#f5f5f5]">
       <Header />
       
-      <main className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <Card className="overflow-visible">
-          <CardContent className="p-8 sm:p-12">
-            {isLoading ? (
-              <div className="flex flex-col items-center">
-                <Skeleton className="w-20 h-20 rounded-full mb-6" />
-                <Skeleton className="h-8 w-64 mb-4" />
-                <Skeleton className="h-4 w-48" />
-              </div>
-            ) : (
-              <>
-                <div className="flex flex-col items-center text-center mb-10">
-                  <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center mb-6">
-                    <CheckCircle className="w-10 h-10 text-primary" />
+      <main className="py-8 min-h-[70vh]">
+        <div className="max-w-[1200px] mx-auto px-5">
+          <Card className="bg-white rounded-xl shadow-[0_2px_12px_rgba(0,0,0,0.06)] overflow-hidden">
+            <CardContent className="p-8 sm:p-12">
+              {isLoading ? (
+                <div className="flex flex-col items-center">
+                  <Skeleton className="w-[90px] h-[90px] rounded-full mb-5" />
+                  <Skeleton className="h-8 w-64 mb-4" />
+                  <Skeleton className="h-4 w-48" />
+                </div>
+              ) : (
+                <div className="text-center py-12 px-5">
+                  {/* Success Icon */}
+                  <div className="w-[90px] h-[90px] rounded-full bg-gradient-to-br from-[#00cc7b] to-[#00ab67] flex items-center justify-center mx-auto mb-5">
+                    <Check className="w-[42px] h-[42px] text-white" />
                   </div>
                   
-                  <h1 className="text-2xl sm:text-3xl font-bold text-foreground mb-3" data-testid="title-success">
-                    Your Visa Preparation is Complete
-                  </h1>
+                  {/* Success Title */}
+                  <h2 className="text-[26px] font-bold text-[#00ab67] mb-2" data-testid="title-success">
+                    تم إكمال تجهيز التأشيرة!
+                  </h2>
                   
-                  <p className="text-muted-foreground max-w-md" data-testid="text-success-description">
-                    All documents have been prepared and your request has been saved. 
-                    You can download your PDF pack anytime from your previous requests.
+                  {/* Description */}
+                  <p className="text-[#707070] mb-6" data-testid="text-success-description">
+                    تم حجز موعدك وملف المستندات جاهز
                   </p>
-                </div>
 
-                <div className="bg-muted/50 rounded-lg p-6 mb-8">
-                  <h2 className="font-semibold text-foreground mb-4" data-testid="title-request-summary">Request Summary</h2>
-                  
-                  <div className="space-y-4">
-                    <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-full bg-card flex items-center justify-center">
-                        <MapPin className="w-4 h-4 text-primary" />
-                      </div>
-                      <div>
-                        <p className="text-sm text-muted-foreground">Destination & Visa</p>
-                        <p className="font-medium text-foreground" data-testid="text-final-destination">
-                          {request?.countryName} - {request?.visaTypeName}
-                        </p>
-                      </div>
+                  {/* Summary Card */}
+                  <div className="bg-gradient-to-br from-[#f8fdf9] to-[#e8f5e9] border-2 border-[#00ab67] rounded-xl p-5 mb-6 max-w-md mx-auto text-right">
+                    <div className="flex justify-between py-2.5 border-b border-[#00ab67]/20">
+                      <span className="text-[#707070] text-sm">رقم الطلب</span>
+                      <span className="font-semibold text-sm" data-testid="text-request-id">
+                        #{request?.id.toUpperCase()}
+                      </span>
                     </div>
-
-                    <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-full bg-card flex items-center justify-center">
-                        <Users className="w-4 h-4 text-primary" />
-                      </div>
-                      <div>
-                        <p className="text-sm text-muted-foreground">Travelers</p>
-                        <p className="font-medium text-foreground" data-testid="text-final-travelers">
-                          {request?.travelers.length} {request?.travelers.length === 1 ? "person" : "people"}
-                        </p>
-                      </div>
+                    <div className="flex justify-between py-2.5 border-b border-[#00ab67]/20">
+                      <span className="text-[#707070] text-sm">الوجهة</span>
+                      <span className="font-semibold text-sm flex items-center gap-2" data-testid="text-final-destination">
+                        <img src={getCountryFlag(country?.id || '')} alt={country?.name} className="w-5 h-4 rounded" />
+                        {country?.nameAr}
+                      </span>
                     </div>
-
                     {request?.appointmentDate && request?.appointmentTime && (
-                      <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 rounded-full bg-card flex items-center justify-center">
-                          <Calendar className="w-4 h-4 text-primary" />
-                        </div>
-                        <div>
-                          <p className="text-sm text-muted-foreground">Embassy Appointment</p>
-                          <p className="font-medium text-foreground" data-testid="text-final-appointment">
-                            {request.appointmentDate} at {request.appointmentTime}
-                          </p>
-                        </div>
+                      <div className="flex justify-between py-2.5">
+                        <span className="text-[#707070] text-sm">الموعد</span>
+                        <span className="font-semibold text-sm" data-testid="text-final-appointment">
+                          {formatDate(request.appointmentDate)} - {formatTime(request.appointmentTime)}
+                        </span>
                       </div>
                     )}
                   </div>
-                </div>
 
-                <div className="flex flex-col sm:flex-row items-center gap-4 justify-center">
-                  <Button 
-                    size="lg"
-                    onClick={handleDownload}
-                    data-testid="button-download-pdf"
-                  >
-                    <Download className="w-5 h-5 mr-2" />
-                    Download PDF Pack
-                  </Button>
-                  
-                  <Link href="/">
-                    <Button 
-                      variant="outline" 
-                      size="lg"
-                      data-testid="button-back-home"
+                  {/* Actions */}
+                  <div className="flex justify-center gap-3">
+                    <Button
+                      onClick={handleDownload}
+                      className="bg-[#00ab67] hover:bg-[#008550] text-white py-3.5 px-7 rounded-lg text-[15px] font-semibold inline-flex items-center gap-2.5"
+                      data-testid="button-download-pdf"
                     >
-                      <Home className="w-5 h-5 mr-2" />
-                      Back to Absher Home
+                      <Download className="w-4 h-4" />
+                      تحميل PDF
                     </Button>
-                  </Link>
+                    
+                    <Link href="/">
+                      <Button
+                        variant="outline"
+                        className="border-2 border-[#00ab67] text-[#00ab67] bg-transparent hover:bg-[#00ab67] hover:text-white py-3.5 px-7 rounded-lg text-[15px] font-semibold"
+                        data-testid="button-back-home"
+                      >
+                        العودة للرئيسية
+                      </Button>
+                    </Link>
+                  </div>
                 </div>
-              </>
-            )}
-          </CardContent>
-        </Card>
+              )}
+            </CardContent>
+          </Card>
+        </div>
       </main>
     </div>
   );
