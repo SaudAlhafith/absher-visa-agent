@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Link, useLocation, useSearch } from "wouter";
 import { Header } from "@/components/Header";
@@ -26,6 +26,11 @@ export default function Step2() {
   const [, setLocation] = useLocation();
   const search = useSearch();
   const { toast } = useToast();
+
+  // Scroll to top on mount
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   
   // Dynamic field values and errors
   const [fieldValues, setFieldValues] = useState<DynamicFieldValues>({});

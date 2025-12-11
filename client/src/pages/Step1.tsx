@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { Link, useLocation } from "wouter";
 import { Header } from "@/components/Header";
@@ -24,6 +24,12 @@ interface VisaMapResponse {
 export default function Step1() {
   const [, setLocation] = useLocation();
   const { toast } = useToast();
+
+  // Scroll to top on mount
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
   const [selectedTravelers, setSelectedTravelers] = useState<Set<string>>(new Set());

@@ -11,6 +11,11 @@ export default function Step3() {
   const [, setLocation] = useLocation();
   const search = useSearch();
   const { toast } = useToast();
+
+  // Scroll to top on mount
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   
   const params = new URLSearchParams(search);
   const requestId = params.get("requestId") || "";

@@ -151,7 +151,7 @@ export class MemStorage implements IStorage {
     const sampleRequest: VisaRequest = {
       id: "req-001",
       countryId: "ae",
-      countryName: "United Arab Emirates",
+      countryName: "الإمارات العربية المتحدة",
       travelers: ["t1", "t2"],
       status: "completed",
       createdAt: "2024-11-15T10:30:00Z",
@@ -163,7 +163,7 @@ export class MemStorage implements IStorage {
     const draftRequest: VisaRequest = {
       id: "req-002",
       countryId: "tr",
-      countryName: "Turkey",
+      countryName: "تركيا",
       travelers: ["t1"],
       status: "draft",
       createdAt: "2024-12-01T14:00:00Z",
@@ -228,8 +228,8 @@ export class MemStorage implements IStorage {
     
     return travelers.map((traveler, index) => ({
       travelerId: traveler.id,
-      travelerName: traveler.name,
-      relationship: traveler.relationship,
+      travelerName: traveler.nameAr,
+      relationship: traveler.relationshipAr,
       status: index === 0 ? "ready" as const : "missing_items" as const,
       missingCount: index === 0 ? 0 : 2,
       requirements: mockRequirements.slice(0, 5),
@@ -269,7 +269,7 @@ export class MemStorage implements IStorage {
     const newRequest: VisaRequest = {
       id,
       countryId: request.countryId,
-      countryName: country?.name || "Unknown",
+      countryName: country?.nameAr || country?.name || "غير معروف",
       travelers: request.travelers,
       status: "draft",
       createdAt: new Date().toISOString(),

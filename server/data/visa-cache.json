@@ -1520,5 +1520,119 @@
       }
     },
     "timestamp": 1765463474812
+  },
+  "SA-AT": {
+    "data": {
+      "data": {
+        "passport": {
+          "code": "SA",
+          "name": "Saudi Arabia",
+          "currency_code": "SAR"
+        },
+        "destination": {
+          "code": "AT",
+          "name": "Austria",
+          "continent": "Europe",
+          "capital": "Vienna",
+          "currency_code": "EUR",
+          "currency": "Euro",
+          "exchange": "4.3733",
+          "passport_validity": "3 months longer than the duration of stay",
+          "phone_code": "+43",
+          "timezone": "+01:00",
+          "population": 8940860,
+          "area_km2": 83883,
+          "embassy_url": "https://www.embassypages.com/saudiarabia#titlePlaceholder2"
+        },
+        "visa_rules": {
+          "primary_rule": {
+            "name": "Visa required",
+            "color": "red"
+          }
+        }
+      },
+      "meta": {
+        "version": "2.0",
+        "language": "en",
+        "generated_at": "2025-12-11T16:39:17+00:00"
+      }
+    },
+    "timestamp": 1765471163209
+  },
+  "SA-CZ": {
+    "data": {
+      "data": {
+        "passport": {
+          "code": "SA",
+          "name": "Saudi Arabia",
+          "currency_code": "SAR"
+        },
+        "destination": {
+          "code": "CZ",
+          "name": "Czech Republic",
+          "continent": "Europe",
+          "capital": "Prague",
+          "currency_code": "EUR",
+          "currency": "Euro",
+          "exchange": "4.3733",
+          "passport_validity": "3 months longer than the duration of stay",
+          "phone_code": "+420",
+          "timezone": "+01:00",
+          "population": 10705384,
+          "area_km2": 78871,
+          "embassy_url": "https://www.embassypages.com/saudiarabia#titlePlaceholder2"
+        },
+        "visa_rules": {
+          "primary_rule": {
+            "name": "Visa required",
+            "color": "red"
+          }
+        }
+      },
+      "meta": {
+        "version": "2.0",
+        "language": "en",
+        "generated_at": "2025-12-11T16:39:21+00:00"
+      }
+    },
+    "timestamp": 1765471167750
+  },
+  "SA-SK": {
+    "data": {
+      "data": {
+        "passport": {
+          "code": "SA",
+          "name": "Saudi Arabia",
+          "currency_code": "SAR"
+        },
+        "destination": {
+          "code": "SK",
+          "name": "Slovakia",
+          "continent": "Europe",
+          "capital": "Bratislava",
+          "currency_code": "EUR",
+          "currency": "Euro",
+          "exchange": "4.3733",
+          "passport_validity": "3 months longer than the duration of stay",
+          "phone_code": "+421",
+          "timezone": "+01:00",
+          "population": 5431252,
+          "area_km2": 49034,
+          "embassy_url": "https://www.embassypages.com/saudiarabia#titlePlaceholder2"
+        },
+        "visa_rules": {
+          "primary_rule": {
+            "name": "Visa required",
+            "color": "red"
+          }
+        }
+      },
+      "meta": {
+        "version": "2.0",
+        "language": "en",
+        "generated_at": "2025-12-11T16:39:23+00:00"
+      }
+    },
+    "timestamp": 1765471169678
   }
 }

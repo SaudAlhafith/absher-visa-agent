@@ -4,6 +4,7 @@ import { storage } from "./storage";
 import { insertVisaRequestSchema, updateVisaRequestSchema, type VisaApiResponse, type Country, type VisaStatus } from "@shared/schema";
 import { getCachedVisaInfo, setCachedVisaInfo, getCachedVisaMap, setCachedVisaMap, type VisaMapData } from "./visaCache";
 import { getCountryFields } from "./data/country-fields";
+import { getEmbassyInstructions } from "./data/embassy-instructions";
 import countries from "i18n-iso-countries";
 import arLocale from "i18n-iso-countries/langs/ar.json" assert { type: "json" };
 
@@ -146,6 +147,16 @@ export async function registerRoutes(httpServer: Server, app: Express): Promise<
       res.json(countryFields);
     } catch (err) {
       res.status(500).json({ error: "Failed to fetch country fields" });
+    }
+  });
+
+  // Embassy-specific instructions for success page
+  app.get("/api/countries/:id/instructions", (req, res) => {
+    try {
+      const instructions = getEmbassyInstructions(req.params.id);
+      res.json(instructions);
+    } catch (err) {
+      res.status(500).json({ error: "Failed to fetch embassy instructions" });
     }
   });
 
