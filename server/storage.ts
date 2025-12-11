@@ -8,16 +8,12 @@ const mockCountries: Country[] = [
   { id: "gb", name: "United Kingdom", nameAr: "المملكة المتحدة", flag: "🇬🇧", visaStatus: "visa_required" },
   { id: "us", name: "United States", nameAr: "الولايات المتحدة", flag: "🇺🇸", visaStatus: "visa_required" },
   { id: "tr", name: "Turkey", nameAr: "تركيا", flag: "🇹🇷", visaStatus: "e_visa" },
-  { id: "ae", name: "United Arab Emirates", nameAr: "الإمارات العربية المتحدة", flag: "🇦🇪", visaStatus: "visa_free" },
   { id: "bh", name: "Bahrain", nameAr: "البحرين", flag: "🇧🇭", visaStatus: "visa_free" },
-  { id: "eg", name: "Egypt", nameAr: "مصر", flag: "🇪🇬", visaStatus: "e_visa" },
   { id: "jp", name: "Japan", nameAr: "اليابان", flag: "🇯🇵", visaStatus: "visa_required" },
   { id: "my", name: "Malaysia", nameAr: "ماليزيا", flag: "🇲🇾", visaStatus: "visa_free" },
-  { id: "in", name: "India", nameAr: "الهند", flag: "🇮🇳", visaStatus: "e_visa" },
-  { id: "th", name: "Thailand", nameAr: "تايلاند", flag: "🇹🇭", visaStatus: "visa_free" },
   { id: "es", name: "Spain", nameAr: "إسبانيا", flag: "🇪🇸", visaStatus: "visa_required" },
   { id: "it", name: "Italy", nameAr: "إيطاليا", flag: "🇮🇹", visaStatus: "visa_required" },
-  { id: "il", name: "Israel", nameAr: "إسرائيل", flag: "🇮🇱", visaStatus: "not_allowed" },
+  
 ];
 
 // Mock data for visa types
