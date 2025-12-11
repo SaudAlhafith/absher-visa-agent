@@ -2,10 +2,24 @@ import { useState, useMemo } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { Link, useLocation } from "wouter";
 import { Header } from "@/components/Header";
-import { Search, ArrowLeft, Globe, FileText, Users, Umbrella, Briefcase, GraduationCap, Heart, UserPlus, Check, Clock, ExternalLink, AlertCircle, Info } from "lucide-react";
+import { WorldMap } from "@/components/WorldMap";
+import { Search, ArrowLeft, Globe, FileText, Users, Umbrella, Briefcase, GraduationCap, Heart, UserPlus, Check, Clock, ExternalLink, AlertCircle, Info, Map, List } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest, queryClient } from "@/lib/queryClient";
 import type { Country, VisaType, Traveler, VisaApiResponse } from "@shared/schema";
+
+interface VisaMapResponse {
+  data: {
+    passport: string;
+    colors: {
+      red?: string;
+      green?: string;
+      blue?: string;
+      yellow?: string;
+    };
+  };
+  meta: { version: string; language: string; generated_at: string; };
+}
 
 export default function Step1() {
   const [, setLocation] = useLocation();
@@ -14,9 +28,15 @@ export default function Step1() {
   const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
   const [selectedVisaType, setSelectedVisaType] = useState<string>("");
   const [selectedTravelers, setSelectedTravelers] = useState<Set<string>>(new Set());
+  const [viewMode, setViewMode] = useState<"map" | "list">("map");
 
   const { data: countries, isLoading: countriesLoading } = useQuery<Country[]>({
     queryKey: ["/api/countries"],
+  });
+
+  // Fetch visa map colors for the world map
+  const { data: visaMapData } = useQuery<VisaMapResponse>({
+    queryKey: ["/api/visa-map"],
   });
 
   const { data: visaTypes, isLoading: visaTypesLoading } = useQuery<VisaType[]>({
@@ -244,63 +264,120 @@ export default function Step1() {
             </div>
           </div>
 
-          {/* Country Selection */}
-          <div className="bg-white rounded-xl shadow-[0_2px_12px_rgba(0,0,0,0.06)] mb-5 overflow-hidden">
-            <div className="bg-gradient-to-br from-[#00ab67] to-[#008550] text-white py-[18px] px-[25px] text-[17px] font-bold flex items-center gap-3">
-              <Globe className="w-5 h-5" />
-              اختر الدولة
+          {/* Country Selection with Map/List Toggle */}
+          <div id="country-selection" className="bg-white rounded-xl shadow-[0_2px_12px_rgba(0,0,0,0.06)] mb-5 overflow-hidden">
+            {/* Header with Toggle */}
+            <div className="bg-gradient-to-br from-[#00ab67] to-[#008550] text-white py-[18px] px-[25px] flex items-center justify-between">
+              <div className="text-[17px] font-bold flex items-center gap-3">
+                <Globe className="w-5 h-5" />
+                اختر الدولة
+              </div>
+              {/* View Toggle */}
+              <div className="flex items-center gap-1 bg-white/20 rounded-lg p-1">
+                <button
+                  onClick={() => setViewMode("map")}
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-[13px] font-medium transition-all ${
+                    viewMode === "map"
+                      ? "bg-white text-[#00ab67]"
+                      : "text-white/90 hover:bg-white/10"
+                  }`}
+                >
+                  <Map className="w-4 h-4" />
+                  خريطة
+                </button>
+                <button
+                  onClick={() => setViewMode("list")}
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-[13px] font-medium transition-all ${
+                    viewMode === "list"
+                      ? "bg-white text-[#00ab67]"
+                      : "text-white/90 hover:bg-white/10"
+                  }`}
+                >
+                  <List className="w-4 h-4" />
+                  قائمة
+                </button>
+              </div>
             </div>
-            <div className="p-[25px]">
-              <div className="relative mb-5">
-                <Search className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#707070]" />
-                <input
-                  type="search"
-                  placeholder="ابحث عن دولة..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pr-11 py-3.5 px-5 border-2 border-[#e0e0e0] rounded-[10px] text-[15px] focus:outline-none focus:border-[#00ab67]"
-                  data-testid="input-search-country"
-                />
-              </div>
 
-              <div className="max-h-[400px] overflow-y-auto pr-2">
-                {countriesLoading ? (
-                  <div className="grid grid-cols-[repeat(auto-fill,minmax(260px,1fr))] gap-3">
-                    {[1, 2, 3, 4, 5, 6].map((i) => (
-                      <div key={i} className="h-16 w-full rounded-[10px] bg-[#e0e0e0] animate-pulse" />
-                    ))}
-                  </div>
+            <div className="p-[25px]">
+              {/* Map View */}
+              {viewMode === "map" && (
+                visaMapData?.data?.colors ? (
+                  <WorldMap
+                    visaColors={visaMapData.data.colors}
+                    onCountryClick={(code) => {
+                      const country = countries?.find(c => c.id === code);
+                      if (country) {
+                        setSelectedCountry(country);
+                      }
+                    }}
+                    selectedCountry={selectedCountry?.id}
+                  />
                 ) : (
-                  <div className="grid grid-cols-[repeat(auto-fill,minmax(260px,1fr))] gap-3">
-                    {filteredCountries.map((country) => {
-                      const statusInfo = getVisaStatusLabel(country.visaStatus);
-                      return (
-                        <div
-                          key={country.id}
-                          onClick={() => setSelectedCountry(country)}
-                          className={`flex items-center gap-3 p-[15px] border-2 rounded-[10px] cursor-pointer transition-all ${
-                            selectedCountry?.id === country.id
-                              ? "border-[#00ab67] bg-[#e8f5e9]"
-                              : "border-[#e0e0e0] hover:border-[#00ab67] hover:bg-[#f8fdf9]"
-                          }`}
-                        >
-                          <img
-                            src={getCountryFlag(country.id)}
-                            alt={country.name}
-                            className="w-9 h-[27px] rounded-[3px] object-cover"
-                          />
-                          <div className="flex-1">
-                            <h4 className="font-semibold text-[15px] mb-[3px]">{country.nameAr}</h4>
-                            <span className={`text-[11px] px-2 py-0.5 rounded-[10px] ${statusInfo.class}`}>
-                              {statusInfo.text}
-                            </span>
-                          </div>
-                        </div>
-                      );
-                    })}
+                  <div className="flex items-center justify-center h-[400px] bg-[#f8fafc] rounded-xl border-2 border-[#e0e0e0]">
+                    <div className="text-center">
+                      <div className="w-8 h-8 border-3 border-[#00ab67] border-t-transparent rounded-full animate-spin mx-auto mb-3"></div>
+                      <p className="text-[#707070] text-[14px]">جاري تحميل الخريطة...</p>
+                    </div>
                   </div>
-                )}
-              </div>
+                )
+              )}
+
+              {/* List View */}
+              {viewMode === "list" && (
+                <>
+                  <div className="relative mb-5">
+                    <Search className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#707070]" />
+                    <input
+                      type="search"
+                      placeholder="ابحث عن دولة..."
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      className="w-full pr-11 py-3.5 px-5 border-2 border-[#e0e0e0] rounded-[10px] text-[15px] focus:outline-none focus:border-[#00ab67]"
+                      data-testid="input-search-country"
+                    />
+                  </div>
+
+                  <div className="max-h-[400px] overflow-y-auto pr-2">
+                    {countriesLoading ? (
+                      <div className="grid grid-cols-[repeat(auto-fill,minmax(260px,1fr))] gap-3">
+                        {[1, 2, 3, 4, 5, 6].map((i) => (
+                          <div key={i} className="h-16 w-full rounded-[10px] bg-[#e0e0e0] animate-pulse" />
+                        ))}
+                      </div>
+                    ) : (
+                      <div className="grid grid-cols-[repeat(auto-fill,minmax(260px,1fr))] gap-3">
+                        {filteredCountries.map((country) => {
+                          const statusInfo = getVisaStatusLabel(country.visaStatus);
+                          return (
+                            <div
+                              key={country.id}
+                              onClick={() => setSelectedCountry(country)}
+                              className={`flex items-center gap-3 p-[15px] border-2 rounded-[10px] cursor-pointer transition-all ${
+                                selectedCountry?.id === country.id
+                                  ? "border-[#00ab67] bg-[#e8f5e9]"
+                                  : "border-[#e0e0e0] hover:border-[#00ab67] hover:bg-[#f8fdf9]"
+                              }`}
+                            >
+                              <img
+                                src={getCountryFlag(country.id)}
+                                alt={country.name}
+                                className="w-9 h-[27px] rounded-[3px] object-cover"
+                              />
+                              <div className="flex-1">
+                                <h4 className="font-semibold text-[15px] mb-[3px]">{country.nameAr}</h4>
+                                <span className={`text-[11px] px-2 py-0.5 rounded-[10px] ${statusInfo.class}`}>
+                                  {statusInfo.text}
+                                </span>
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    )}
+                  </div>
+                </>
+              )}
 
               {/* Visa Info Panel - Shows when a country is selected */}
               {selectedCountry && (

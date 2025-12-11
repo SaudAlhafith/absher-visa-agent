@@ -106,6 +106,19 @@ export async function registerRoutes(httpServer: Server, app: Express): Promise<
     }
   });
 
+  // Visa map (raw colors data for world map)
+  app.get("/api/visa-map", async (_req, res) => {
+    try {
+      const visaMap = await getVisaMap();
+      if (visaMap) {
+        return res.json(visaMap);
+      }
+      res.status(404).json({ error: "Visa map not available" });
+    } catch (err) {
+      res.status(500).json({ error: "Failed to fetch visa map" });
+    }
+  });
+
   // Single country
   app.get("/api/countries/:id", async (req, res) => {
     try {
