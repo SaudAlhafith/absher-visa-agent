@@ -125,3 +125,71 @@ export const updateVisaRequestSchema = z.object({
 });
 
 export type UpdateVisaRequest = z.infer<typeof updateVisaRequestSchema>;
+
+// Visa API Response Types
+export interface VisaApiPassport {
+  code: string;
+  name: string;
+  currency_code?: string;
+}
+
+export interface VisaApiDestination {
+  code: string;
+  name: string;
+  continent?: string;
+  capital?: string;
+  currency_code?: string;
+  currency?: string;
+  exchange?: string;
+  passport_validity?: string;
+  phone_code?: string;
+  timezone?: string;
+  population?: number;
+  area_km2?: number;
+  embassy_url?: string;
+}
+
+export interface VisaApiMandatoryRegistration {
+  name: string;
+  color: "green" | "blue" | "yellow" | "red";
+  link?: string;
+}
+
+export interface VisaApiRule {
+  name: string;
+  duration?: string;
+  color: "green" | "blue" | "yellow" | "red";
+  link?: string;
+}
+
+export interface VisaApiExceptionRule {
+  name?: string;
+  exception_type_name?: string;
+  full_text?: string;
+  country_codes?: string[];
+  link?: string;
+}
+
+export interface VisaApiRules {
+  primary_rule: VisaApiRule;
+  secondary_rule?: VisaApiRule;
+  exception_rule?: VisaApiExceptionRule;
+}
+
+export interface VisaApiData {
+  passport: VisaApiPassport;
+  destination: VisaApiDestination;
+  mandatory_registration?: VisaApiMandatoryRegistration;
+  visa_rules: VisaApiRules;
+}
+
+export interface VisaApiMeta {
+  version: string;
+  language: string;
+  generated_at: string;
+}
+
+export interface VisaApiResponse {
+  data: VisaApiData;
+  meta: VisaApiMeta;
+}

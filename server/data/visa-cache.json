@@ -1,0 +1,1040 @@
+{
+  "SA-FR": {
+    "data": {
+      "data": {
+        "passport": {
+          "code": "SA",
+          "name": "Saudi Arabia",
+          "currency_code": "SAR"
+        },
+        "destination": {
+          "code": "FR",
+          "name": "France",
+          "continent": "Europe",
+          "capital": "Paris",
+          "currency_code": "EUR",
+          "currency": "Euro",
+          "exchange": "4.3733",
+          "passport_validity": "3 months longer than the duration of stay",
+          "phone_code": "+33",
+          "timezone": "+01:00",
+          "population": 68305148,
+          "area_km2": 543941,
+          "embassy_url": "https://www.embassypages.com/saudiarabia#titlePlaceholder2"
+        },
+        "visa_rules": {
+          "primary_rule": {
+            "name": "Visa required",
+            "color": "red"
+          }
+        }
+      },
+      "meta": {
+        "version": "2.0",
+        "language": "en",
+        "generated_at": "2025-12-11T11:52:43+00:00"
+      }
+    },
+    "timestamp": 1765454113930
+  },
+  "SA-TR": {
+    "data": {
+      "data": {
+        "passport": {
+          "code": "SA",
+          "name": "Saudi Arabia",
+          "currency_code": "SAR"
+        },
+        "destination": {
+          "code": "TR",
+          "name": "Türkiye",
+          "continent": "Asia",
+          "capital": "Ankara",
+          "currency_code": "TRY",
+          "currency": "Turkish Lira",
+          "exchange": "0.08799",
+          "passport_validity": "5 months",
+          "phone_code": "+90",
+          "timezone": "+03:00",
+          "population": 83047706,
+          "area_km2": 769604,
+          "embassy_url": "https://www.embassypages.com/saudiarabia#titlePlaceholder2"
+        },
+        "visa_rules": {
+          "primary_rule": {
+            "name": "Visa not required",
+            "duration": "90 days",
+            "color": "green"
+          }
+        }
+      },
+      "meta": {
+        "version": "2.0",
+        "language": "en",
+        "generated_at": "2025-12-11T11:55:24+00:00"
+      }
+    },
+    "timestamp": 1765454130963
+  },
+  "SA-ES": {
+    "data": {
+      "data": {
+        "passport": {
+          "code": "SA",
+          "name": "Saudi Arabia",
+          "currency_code": "SAR"
+        },
+        "destination": {
+          "code": "ES",
+          "name": "Spain",
+          "continent": "Europe",
+          "capital": "Madrid",
+          "currency_code": "EUR",
+          "currency": "Euro",
+          "exchange": "4.3733",
+          "passport_validity": "3 months longer than the duration of stay",
+          "phone_code": "+34",
+          "timezone": "+01:00",
+          "population": 47163418,
+          "area_km2": 505983,
+          "embassy_url": "https://www.embassypages.com/saudiarabia#titlePlaceholder2"
+        },
+        "visa_rules": {
+          "primary_rule": {
+            "name": "Visa required",
+            "color": "red"
+          }
+        }
+      },
+      "meta": {
+        "version": "2.0",
+        "language": "en",
+        "generated_at": "2025-12-11T11:55:48+00:00"
+      }
+    },
+    "timestamp": 1765454154115
+  },
+  "SA-US": {
+    "data": {
+      "data": {
+        "passport": {
+          "code": "SA",
+          "name": "Saudi Arabia",
+          "currency_code": "SAR"
+        },
+        "destination": {
+          "code": "US",
+          "name": "United States of America",
+          "continent": "North America",
+          "capital": "Washington, D.C.",
+          "currency_code": "USD",
+          "currency": "US Dollar",
+          "exchange": "3.75",
+          "passport_validity": "6 months longer than the duration of stay",
+          "phone_code": "+1",
+          "timezone": "-05:00",
+          "population": 337341954,
+          "area_km2": 9834633,
+          "embassy_url": "https://www.embassypages.com/saudiarabia#titlePlaceholder2"
+        },
+        "visa_rules": {
+          "primary_rule": {
+            "name": "Visa required",
+            "color": "red"
+          }
+        }
+      },
+      "meta": {
+        "version": "2.0",
+        "language": "en",
+        "generated_at": "2025-12-11T11:33:36+00:00"
+      }
+    },
+    "timestamp": 1765454197839
+  },
+  "SA-JP": {
+    "data": {
+      "data": {
+        "passport": {
+          "code": "SA",
+          "name": "Saudi Arabia",
+          "currency_code": "SAR"
+        },
+        "destination": {
+          "code": "JP",
+          "name": "Japan",
+          "continent": "Asia",
+          "capital": "Tokyo",
+          "currency_code": "JPY",
+          "currency": "Japanese Yen",
+          "exchange": "0.024",
+          "passport_validity": "Valid on arrival",
+          "phone_code": "+81",
+          "timezone": "+09:00",
+          "population": 124214766,
+          "area_km2": 377974,
+          "embassy_url": "https://www.embassypages.com/saudiarabia#titlePlaceholder2"
+        },
+        "mandatory_registration": {
+          "name": "Customs declaration",
+          "color": "yellow",
+          "link": "https://link.travel-buddy.ai/?link=86E331T3"
+        },
+        "visa_rules": {
+          "primary_rule": {
+            "name": "eVisa",
+            "duration": "90 days",
+            "color": "blue",
+            "link": "https://link.travel-buddy.ai/?link=86E411T1"
+          }
+        }
+      },
+      "meta": {
+        "version": "2.0",
+        "language": "en",
+        "generated_at": "2025-12-11T11:56:41+00:00"
+      }
+    },
+    "timestamp": 1765454207789
+  },
+  "SA-DE": {
+    "data": {
+      "data": {
+        "passport": {
+          "code": "SA",
+          "name": "Saudi Arabia",
+          "currency_code": "SAR"
+        },
+        "destination": {
+          "code": "DE",
+          "name": "Germany",
+          "continent": "Europe",
+          "capital": "Berlin",
+          "currency_code": "EUR",
+          "currency": "Euro",
+          "exchange": "4.3733",
+          "passport_validity": "3 months longer than the duration of stay",
+          "phone_code": "+49",
+          "timezone": "+01:00",
+          "population": 84316622,
+          "area_km2": 357592,
+          "embassy_url": "https://www.embassypages.com/saudiarabia#titlePlaceholder2"
+        },
+        "visa_rules": {
+          "primary_rule": {
+            "name": "Visa required",
+            "color": "red"
+          }
+        }
+      },
+      "meta": {
+        "version": "2.0",
+        "language": "en",
+        "generated_at": "2025-12-11T11:57:31+00:00"
+      }
+    },
+    "timestamp": 1765454257673
+  },
+  "SA-BH": {
+    "data": {
+      "data": {
+        "passport": {
+          "code": "SA",
+          "name": "Saudi Arabia",
+          "currency_code": "SAR"
+        },
+        "destination": {
+          "code": "BH",
+          "name": "Bahrain",
+          "continent": "Asia",
+          "capital": "Manama",
+          "currency_code": "BHD",
+          "currency": "Bahraini Dinar",
+          "exchange": "9.9734",
+          "passport_validity": "Valid for period of stay",
+          "phone_code": "+973",
+          "timezone": "+03:00",
+          "population": 1553886,
+          "area_km2": 778,
+          "embassy_url": "https://www.embassypages.com/saudiarabia#titlePlaceholder2"
+        },
+        "visa_rules": {
+          "primary_rule": {
+            "name": "Freedom of movement",
+            "color": "green"
+          }
+        }
+      },
+      "meta": {
+        "version": "2.0",
+        "language": "en",
+        "generated_at": "2025-12-11T11:57:38+00:00"
+      }
+    },
+    "timestamp": 1765454264789
+  },
+  "SA-CH": {
+    "data": {
+      "data": {
+        "passport": {
+          "code": "SA",
+          "name": "Saudi Arabia",
+          "currency_code": "SAR"
+        },
+        "destination": {
+          "code": "CH",
+          "name": "Switzerland",
+          "continent": "Europe",
+          "capital": "Bern",
+          "currency_code": "CHF",
+          "currency": "Swiss Franc",
+          "exchange": "4.6751",
+          "passport_validity": "3 months longer than the duration of stay",
+          "phone_code": "+41",
+          "timezone": "+01:00",
+          "population": 8508698,
+          "area_km2": 41291,
+          "embassy_url": "https://www.embassypages.com/saudiarabia#titlePlaceholder2"
+        },
+        "visa_rules": {
+          "primary_rule": {
+            "name": "Visa required",
+            "color": "red"
+          }
+        }
+      },
+      "meta": {
+        "version": "2.0",
+        "language": "en",
+        "generated_at": "2025-12-11T12:15:19+00:00"
+      }
+    },
+    "timestamp": 1765455325878
+  },
+  "SA-AE": {
+    "data": {
+      "data": {
+        "passport": {
+          "code": "SA",
+          "name": "Saudi Arabia",
+          "currency_code": "SAR"
+        },
+        "destination": {
+          "code": "AE",
+          "name": "United Arab Emirates",
+          "continent": "Asia",
+          "capital": "Abu Dhabi",
+          "currency_code": "AED",
+          "currency": "UAE Dirham",
+          "exchange": "1.0211",
+          "passport_validity": "6 months",
+          "phone_code": "+971",
+          "timezone": "+04:00",
+          "population": 9915803,
+          "area_km2": 71024,
+          "embassy_url": "https://www.embassypages.com/saudiarabia#titlePlaceholder2"
+        },
+        "visa_rules": {
+          "primary_rule": {
+            "name": "Freedom of movement",
+            "color": "green"
+          }
+        }
+      },
+      "meta": {
+        "version": "2.0",
+        "language": "en",
+        "generated_at": "2025-12-11T12:32:57+00:00"
+      }
+    },
+    "timestamp": 1765456383996
+  },
+  "SA-HU": {
+    "data": {
+      "data": {
+        "passport": {
+          "code": "SA",
+          "name": "Saudi Arabia",
+          "currency_code": "SAR"
+        },
+        "destination": {
+          "code": "HU",
+          "name": "Hungary",
+          "continent": "Europe",
+          "capital": "Budapest",
+          "currency_code": "EUR",
+          "currency": "Euro",
+          "exchange": "4.3733",
+          "passport_validity": "3 months longer than the duration of stay",
+          "phone_code": "+36",
+          "timezone": "+01:00",
+          "population": 9699577,
+          "area_km2": 93025,
+          "embassy_url": "https://www.embassypages.com/saudiarabia#titlePlaceholder2"
+        },
+        "visa_rules": {
+          "primary_rule": {
+            "name": "Visa required",
+            "color": "red"
+          }
+        }
+      },
+      "meta": {
+        "version": "2.0",
+        "language": "en",
+        "generated_at": "2025-12-11T12:33:23+00:00"
+      }
+    },
+    "timestamp": 1765456409745
+  },
+  "SA-AW": {
+    "data": {
+      "data": {
+        "passport": {
+          "code": "SA",
+          "name": "Saudi Arabia",
+          "currency_code": "SAR"
+        },
+        "destination": {
+          "code": "AW",
+          "name": "Aruba",
+          "continent": "North America",
+          "capital": "Oranjestad",
+          "currency_code": "AWG",
+          "currency": "Aruban Florin",
+          "exchange": "N/A",
+          "passport_validity": "Valid for period of stay",
+          "phone_code": "+297",
+          "timezone": "−04:00",
+          "population": 123702,
+          "area_km2": 180,
+          "embassy_url": "https://www.embassypages.com/saudiarabia#titlePlaceholder2"
+        },
+        "mandatory_registration": {
+          "name": "ED Card",
+          "color": "yellow",
+          "link": "https://link.travel-buddy.ai/?link=200E335T3"
+        },
+        "visa_rules": {
+          "primary_rule": {
+            "name": "Visa required",
+            "color": "red"
+          },
+          "exception_rule": {
+            "name": "Visa not required",
+            "exception_type_name": "If have a multi-entry valid visa issued by",
+            "duration": "90 days",
+            "color": "green",
+            "country_codes": [
+              "SH",
+              "IE",
+              "GB"
+            ]
+          }
+        }
+      },
+      "meta": {
+        "version": "2.0",
+        "language": "en",
+        "generated_at": "2025-12-11T12:39:18+00:00"
+      }
+    },
+    "timestamp": 1765456764770
+  },
+  "SA-AM": {
+    "data": {
+      "data": {
+        "passport": {
+          "code": "SA",
+          "name": "Saudi Arabia",
+          "currency_code": "SAR"
+        },
+        "destination": {
+          "code": "AM",
+          "name": "Armenia",
+          "continent": "Asia",
+          "capital": "Yerevan",
+          "currency_code": "AMD",
+          "currency": "Armenian Dram",
+          "exchange": "0.009823",
+          "passport_validity": "Valid for period of stay",
+          "phone_code": "+374",
+          "timezone": "+04:00",
+          "population": 2989091,
+          "area_km2": 29743,
+          "embassy_url": "https://www.embassypages.com/saudiarabia#titlePlaceholder2"
+        },
+        "visa_rules": {
+          "primary_rule": {
+            "name": "Visa not required",
+            "duration": "180 days",
+            "color": "green"
+          }
+        }
+      },
+      "meta": {
+        "version": "2.0",
+        "language": "en",
+        "generated_at": "2025-12-11T12:39:30+00:00"
+      }
+    },
+    "timestamp": 1765456776937
+  },
+  "SA-HK": {
+    "data": {
+      "data": {
+        "passport": {
+          "code": "SA",
+          "name": "Saudi Arabia",
+          "currency_code": "SAR"
+        },
+        "destination": {
+          "code": "HK",
+          "name": "Hong Kong",
+          "continent": "Asia",
+          "capital": "Hong Kong",
+          "currency_code": "HKD",
+          "currency": "Hong Kong Dollar",
+          "exchange": "0.4819",
+          "passport_validity": "1 month longer than the duration of stay",
+          "phone_code": "+852",
+          "timezone": "+08:00",
+          "population": 7276588,
+          "area_km2": 1114,
+          "embassy_url": "https://www.embassypages.com/saudiarabia#titlePlaceholder2"
+        },
+        "visa_rules": {
+          "primary_rule": {
+            "name": "Visa not required",
+            "duration": "30 days",
+            "color": "green"
+          }
+        }
+      },
+      "meta": {
+        "version": "2.0",
+        "language": "en",
+        "generated_at": "2025-12-11T12:39:34+00:00"
+      }
+    },
+    "timestamp": 1765456780924
+  },
+  "SA-NL": {
+    "data": {
+      "data": {
+        "passport": {
+          "code": "SA",
+          "name": "Saudi Arabia",
+          "currency_code": "SAR"
+        },
+        "destination": {
+          "code": "NL",
+          "name": "Netherlands",
+          "continent": "Europe",
+          "capital": "Amsterdam",
+          "currency_code": "EUR",
+          "currency": "Euro",
+          "exchange": "4.3733",
+          "passport_validity": "3 months longer than the duration of stay",
+          "phone_code": "+31",
+          "timezone": "+01:00",
+          "population": 17400824,
+          "area_km2": 41543,
+          "embassy_url": "https://www.embassypages.com/saudiarabia#titlePlaceholder2"
+        },
+        "visa_rules": {
+          "primary_rule": {
+            "name": "Visa required",
+            "color": "red"
+          }
+        }
+      },
+      "meta": {
+        "version": "2.0",
+        "language": "en",
+        "generated_at": "2025-12-11T12:39:36+00:00"
+      }
+    },
+    "timestamp": 1765456782925
+  },
+  "SA-EC": {
+    "data": {
+      "data": {
+        "passport": {
+          "code": "SA",
+          "name": "Saudi Arabia",
+          "currency_code": "SAR"
+        },
+        "destination": {
+          "code": "EC",
+          "name": "Ecuador",
+          "continent": "South America",
+          "capital": "Quito",
+          "currency_code": "USD",
+          "currency": "US Dollar",
+          "exchange": "3.75",
+          "passport_validity": "6 months",
+          "phone_code": "+593",
+          "timezone": "−05:00",
+          "population": 17289554,
+          "area_km2": 256700,
+          "embassy_url": "https://www.embassypages.com/saudiarabia#titlePlaceholder2"
+        },
+        "mandatory_registration": {
+          "name": "Customs Registration Form",
+          "color": "yellow",
+          "link": "https://link.travel-buddy.ai/?link=50E436T3"
+        },
+        "visa_rules": {
+          "primary_rule": {
+            "name": "Visa not required",
+            "duration": "90 days",
+            "color": "green"
+          }
+        }
+      },
+      "meta": {
+        "version": "2.0",
+        "language": "en",
+        "generated_at": "2025-12-11T12:40:34+00:00"
+      }
+    },
+    "timestamp": 1765456840923
+  },
+  "SA-IS": {
+    "data": {
+      "data": {
+        "passport": {
+          "code": "SA",
+          "name": "Saudi Arabia",
+          "currency_code": "SAR"
+        },
+        "destination": {
+          "code": "IS",
+          "name": "Iceland",
+          "continent": "Europe",
+          "capital": "Reykjavik",
+          "currency_code": "ISK",
+          "currency": "Icelandic Króna",
+          "exchange": "0.02934",
+          "passport_validity": "3 months longer than the duration of stay",
+          "phone_code": "+354",
+          "timezone": "±00:00",
+          "population": 357603,
+          "area_km2": 103000,
+          "embassy_url": "https://www.embassypages.com/saudiarabia#titlePlaceholder2"
+        },
+        "visa_rules": {
+          "primary_rule": {
+            "name": "Visa required",
+            "color": "red"
+          }
+        }
+      },
+      "meta": {
+        "version": "2.0",
+        "language": "en",
+        "generated_at": "2025-12-11T12:40:37+00:00"
+      }
+    },
+    "timestamp": 1765456843331
+  },
+  "SA-ET": {
+    "data": {
+      "data": {
+        "passport": {
+          "code": "SA",
+          "name": "Saudi Arabia",
+          "currency_code": "SAR"
+        },
+        "destination": {
+          "code": "ET",
+          "name": "Ethiopia",
+          "continent": "Africa",
+          "capital": "Addis Ababa",
+          "currency_code": "ETB",
+          "currency": "Ethiopian Birr",
+          "exchange": "0.02424",
+          "passport_validity": "6 months",
+          "phone_code": "+251",
+          "timezone": "+03:00",
+          "population": 113656596,
+          "area_km2": 1120000,
+          "embassy_url": "https://www.embassypages.com/saudiarabia#titlePlaceholder2"
+        },
+        "visa_rules": {
+          "primary_rule": {
+            "name": "Visa on arrival",
+            "duration": "90 days",
+            "color": "blue"
+          },
+          "secondary_rule": {
+            "name": "eVisa",
+            "duration": "90 days",
+            "color": "blue",
+            "link": "https://link.travel-buddy.ai/?link=55E57T2"
+          }
+        }
+      },
+      "meta": {
+        "version": "2.0",
+        "language": "en",
+        "generated_at": "2025-12-11T12:42:46+00:00"
+      }
+    },
+    "timestamp": 1765456972833
+  },
+  "SA-EE": {
+    "data": {
+      "data": {
+        "passport": {
+          "code": "SA",
+          "name": "Saudi Arabia",
+          "currency_code": "SAR"
+        },
+        "destination": {
+          "code": "EE",
+          "name": "Estonia",
+          "continent": "Europe",
+          "capital": "Tallinn",
+          "currency_code": "EUR",
+          "currency": "Euro",
+          "exchange": "4.3733",
+          "passport_validity": "3 months longer than the duration of stay",
+          "phone_code": "+372",
+          "timezone": "+02:00",
+          "population": 1211524,
+          "area_km2": 45339,
+          "embassy_url": "https://www.embassypages.com/saudiarabia#titlePlaceholder2"
+        },
+        "visa_rules": {
+          "primary_rule": {
+            "name": "Visa required",
+            "color": "red"
+          }
+        }
+      },
+      "meta": {
+        "version": "2.0",
+        "language": "en",
+        "generated_at": "2025-12-11T12:48:22+00:00"
+      }
+    },
+    "timestamp": 1765457308812
+  },
+  "SA-AF": {
+    "data": {
+      "data": {
+        "passport": {
+          "code": "SA",
+          "name": "Saudi Arabia",
+          "currency_code": "SAR"
+        },
+        "destination": {
+          "code": "AF",
+          "name": "Afghanistan",
+          "continent": "Asia",
+          "capital": "Kabul",
+          "currency_code": "AFN",
+          "currency": "Afghan Afghani",
+          "exchange": "0.05658",
+          "passport_validity": "Valid on arrival",
+          "phone_code": "+93",
+          "timezone": "+04:30",
+          "population": 39232003,
+          "area_km2": 652864,
+          "embassy_url": "https://www.embassypages.com/saudiarabia#titlePlaceholder2"
+        },
+        "visa_rules": {
+          "primary_rule": {
+            "name": "Visa required",
+            "color": "red"
+          }
+        }
+      },
+      "meta": {
+        "version": "2.0",
+        "language": "en",
+        "generated_at": "2025-12-11T12:49:50+00:00"
+      }
+    },
+    "timestamp": 1765457396856
+  },
+  "SA-AR": {
+    "data": {
+      "data": {
+        "passport": {
+          "code": "SA",
+          "name": "Saudi Arabia",
+          "currency_code": "SAR"
+        },
+        "destination": {
+          "code": "AR",
+          "name": "Argentina",
+          "continent": "South America",
+          "capital": "Buenos Aires",
+          "currency_code": "ARS",
+          "currency": "Argentine Peso",
+          "exchange": "0.002605",
+          "passport_validity": "Valid on arrival",
+          "phone_code": "+54",
+          "timezone": "−03:00",
+          "population": 46621847,
+          "area_km2": 2791810,
+          "embassy_url": "https://www.embassypages.com/saudiarabia#titlePlaceholder2"
+        },
+        "visa_rules": {
+          "primary_rule": {
+            "name": "Visa required",
+            "color": "red"
+          },
+          "exception_rule": {
+            "name": "AVE",
+            "exception_type_name": "If have a valid visa issued by",
+            "duration": "90 days",
+            "color": "yellow",
+            "country_codes": [
+              "US"
+            ]
+          }
+        }
+      },
+      "meta": {
+        "version": "2.0",
+        "language": "en",
+        "generated_at": "2025-12-11T12:50:01+00:00"
+      }
+    },
+    "timestamp": 1765457407535
+  },
+  "SA-UY": {
+    "data": {
+      "data": {
+        "passport": {
+          "code": "SA",
+          "name": "Saudi Arabia",
+          "currency_code": "SAR"
+        },
+        "destination": {
+          "code": "UY",
+          "name": "Uruguay",
+          "continent": "South America",
+          "capital": "Montevideo",
+          "currency_code": "UYU",
+          "currency": "Uruguayan Peso",
+          "exchange": "0.0957",
+          "passport_validity": "Valid on arrival",
+          "phone_code": "+598",
+          "timezone": "−03:00",
+          "population": 3407213,
+          "area_km2": 193356,
+          "embassy_url": "https://www.embassypages.com/saudiarabia#titlePlaceholder2"
+        },
+        "visa_rules": {
+          "primary_rule": {
+            "name": "Visa required",
+            "color": "red"
+          }
+        }
+      },
+      "meta": {
+        "version": "2.0",
+        "language": "en",
+        "generated_at": "2025-12-11T12:50:06+00:00"
+      }
+    },
+    "timestamp": 1765457412546
+  },
+  "SA-AL": {
+    "data": {
+      "data": {
+        "passport": {
+          "code": "SA",
+          "name": "Saudi Arabia",
+          "currency_code": "SAR"
+        },
+        "destination": {
+          "code": "AL",
+          "name": "Albania",
+          "continent": "Europe",
+          "capital": "Tirana",
+          "currency_code": "ALL",
+          "currency": "Albanian Lek",
+          "exchange": "0.0452",
+          "passport_validity": "3 months",
+          "phone_code": "+355",
+          "timezone": "+01:00",
+          "population": 3101621,
+          "area_km2": 28703,
+          "embassy_url": "https://www.embassypages.com/saudiarabia#titlePlaceholder2"
+        },
+        "visa_rules": {
+          "primary_rule": {
+            "name": "Visa not required",
+            "color": "green"
+          }
+        }
+      },
+      "meta": {
+        "version": "2.0",
+        "language": "en",
+        "generated_at": "2025-12-11T12:50:52+00:00"
+      }
+    },
+    "timestamp": 1765457458710
+  },
+  "SA-BR": {
+    "data": {
+      "data": {
+        "passport": {
+          "code": "SA",
+          "name": "Saudi Arabia",
+          "currency_code": "SAR"
+        },
+        "destination": {
+          "code": "BR",
+          "name": "Brazil",
+          "continent": "South America",
+          "capital": "Brasília",
+          "currency_code": "BRL",
+          "currency": "Brazilian Real",
+          "exchange": "0.6861",
+          "passport_validity": "Valid for period of stay",
+          "phone_code": "+55",
+          "timezone": "−03:00",
+          "population": 218689757,
+          "area_km2": 8502728,
+          "embassy_url": "https://www.embassypages.com/saudiarabia#titlePlaceholder2"
+        },
+        "visa_rules": {
+          "primary_rule": {
+            "name": "Visa required",
+            "color": "red"
+          }
+        }
+      },
+      "meta": {
+        "version": "2.0",
+        "language": "en",
+        "generated_at": "2025-12-11T12:50:56+00:00"
+      }
+    },
+    "timestamp": 1765457462999
+  },
+  "SA-DZ": {
+    "data": {
+      "data": {
+        "passport": {
+          "code": "SA",
+          "name": "Saudi Arabia",
+          "currency_code": "SAR"
+        },
+        "destination": {
+          "code": "DZ",
+          "name": "Algeria",
+          "continent": "Africa",
+          "capital": "Algiers",
+          "currency_code": "DZD",
+          "currency": "Algerian Dinar",
+          "exchange": "0.0288",
+          "passport_validity": "6 months",
+          "phone_code": "+213",
+          "timezone": "+01:00",
+          "population": 44758398,
+          "area_km2": 2381741,
+          "embassy_url": "https://www.embassypages.com/saudiarabia#titlePlaceholder2"
+        },
+        "visa_rules": {
+          "primary_rule": {
+            "name": "Visa required",
+            "color": "red"
+          }
+        }
+      },
+      "meta": {
+        "version": "2.0",
+        "language": "en",
+        "generated_at": "2025-12-11T12:51:08+00:00"
+      }
+    },
+    "timestamp": 1765457474281
+  },
+  "SA-DK": {
+    "data": {
+      "data": {
+        "passport": {
+          "code": "SA",
+          "name": "Saudi Arabia",
+          "currency_code": "SAR"
+        },
+        "destination": {
+          "code": "DK",
+          "name": "Denmark",
+          "continent": "Europe",
+          "capital": "Copenhagen",
+          "currency_code": "EUR",
+          "currency": "Euro",
+          "exchange": "4.3733",
+          "passport_validity": "3 months longer than the duration of stay",
+          "phone_code": "+45",
+          "timezone": "+01:00",
+          "population": 5920767,
+          "area_km2": 42838,
+          "embassy_url": "https://www.embassypages.com/saudiarabia#titlePlaceholder2"
+        },
+        "visa_rules": {
+          "primary_rule": {
+            "name": "Visa required",
+            "color": "red"
+          }
+        }
+      },
+      "meta": {
+        "version": "2.0",
+        "language": "en",
+        "generated_at": "2025-12-11T12:51:10+00:00"
+      }
+    },
+    "timestamp": 1765457476728
+  },
+  "SA-IQ": {
+    "data": {
+      "data": {
+        "passport": {
+          "code": "SA",
+          "name": "Saudi Arabia",
+          "currency_code": "SAR"
+        },
+        "destination": {
+          "code": "IQ",
+          "name": "Iraq",
+          "continent": "Asia",
+          "capital": "Baghdad",
+          "currency_code": "IQD",
+          "currency": "Iraqi Dinar",
+          "exchange": "0.002862",
+          "passport_validity": "6 months",
+          "phone_code": "+964",
+          "timezone": "+03:00",
+          "population": 40462701,
+          "area_km2": 435052,
+          "embassy_url": "https://www.embassypages.com/saudiarabia#titlePlaceholder2"
+        },
+        "visa_rules": {
+          "primary_rule": {
+            "name": "eVisa",
+            "duration": "30 days",
+            "color": "blue",
+            "link": "https://link.travel-buddy.ai/?link=80E285T1"
+          }
+        }
+      },
+      "meta": {
+        "version": "2.0",
+        "language": "en",
+        "generated_at": "2025-12-11T12:51:53+00:00"
+      }
+    },
+    "timestamp": 1765457519644
+  }
+}
