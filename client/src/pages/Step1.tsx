@@ -3,10 +3,10 @@ import { useQuery, useMutation } from "@tanstack/react-query";
 import { Link, useLocation } from "wouter";
 import { Header } from "@/components/Header";
 import { WorldMap } from "@/components/WorldMap";
-import { Search, ArrowLeft, Globe, FileText, Users, Umbrella, Briefcase, GraduationCap, Heart, UserPlus, Check, Clock, ExternalLink, AlertCircle, Info, Map, List } from "lucide-react";
+import { Search, ArrowLeft, Globe, Users, Check, Clock, ExternalLink, AlertCircle, Info, Map, List } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest, queryClient } from "@/lib/queryClient";
-import type { Country, VisaType, Traveler, VisaApiResponse } from "@shared/schema";
+import type { Country, Traveler, VisaApiResponse } from "@shared/schema";
 
 interface VisaMapResponse {
   data: {
@@ -26,9 +26,8 @@ export default function Step1() {
   const { toast } = useToast();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
-  const [selectedVisaType, setSelectedVisaType] = useState<string>("");
   const [selectedTravelers, setSelectedTravelers] = useState<Set<string>>(new Set());
-  const [viewMode, setViewMode] = useState<"map" | "list">("map");
+  const [viewMode, setViewMode] = useState<"map" | "list">("list");
 
   const { data: countries, isLoading: countriesLoading } = useQuery<Country[]>({
     queryKey: ["/api/countries"],
@@ -37,10 +36,6 @@ export default function Step1() {
   // Fetch visa map colors for the world map
   const { data: visaMapData } = useQuery<VisaMapResponse>({
     queryKey: ["/api/visa-map"],
-  });
-
-  const { data: visaTypes, isLoading: visaTypesLoading } = useQuery<VisaType[]>({
-    queryKey: ["/api/visa-types"],
   });
 
   const { data: travelers, isLoading: travelersLoading } = useQuery<Traveler[]>({
@@ -57,7 +52,6 @@ export default function Step1() {
     mutationFn: async () => {
       const response = await apiRequest("POST", "/api/requests", {
         countryId: selectedCountry!.id,
-        visaTypeId: selectedVisaType,
         travelers: Array.from(selectedTravelers),
       });
       return response.json();
@@ -96,7 +90,6 @@ export default function Step1() {
 
   const canContinue = selectedCountry && 
     selectedCountry.visaStatus !== "not_allowed" && 
-    selectedVisaType && 
     selectedTravelers.size > 0;
 
   const handleContinue = () => {
@@ -225,17 +218,6 @@ export default function Step1() {
     }
     
     return ruleText;
-  };
-
-  const getVisaTypeIcon = (id: string) => {
-    const icons: Record<string, any> = {
-      tourist: Umbrella,
-      business: Briefcase,
-      student: GraduationCap,
-      medical: Heart,
-      transit: UserPlus,
-    };
-    return icons[id] || FileText;
   };
 
   const getTravelerInitial = (name: string) => {
@@ -474,44 +456,6 @@ export default function Step1() {
                      
                     </div>
                   ) : null}
-                </div>
-              )}
-            </div>
-          </div>
-
-          {/* Visa Type Selection */}
-          <div className="bg-white rounded-xl shadow-[0_2px_12px_rgba(0,0,0,0.06)] mb-5 overflow-hidden">
-            <div className="bg-gradient-to-br from-[#00ab67] to-[#008550] text-white py-[18px] px-[25px] text-[17px] font-bold flex items-center gap-3">
-              <FileText className="w-5 h-5" />
-              نوع التأشيرة
-            </div>
-            <div className="p-[25px]">
-              {visaTypesLoading ? (
-                <div className="flex gap-3 flex-wrap">
-                  {[1, 2, 3, 4, 5].map((i) => (
-                    <div key={i} className="h-10 w-24 rounded-lg bg-[#e0e0e0] animate-pulse" />
-                  ))}
-                </div>
-              ) : (
-                <div className="flex gap-3 flex-wrap">
-                  {visaTypes?.map((type) => {
-                    const Icon = getVisaTypeIcon(type.id);
-                    return (
-                      <button
-                        key={type.id}
-                        onClick={() => setSelectedVisaType(type.id)}
-                        className={`py-2.5 px-5 border-2 rounded-lg cursor-pointer font-medium flex items-center gap-2 transition-all ${
-                          selectedVisaType === type.id
-                            ? "bg-[#00ab67] border-[#00ab67] text-white"
-                            : "bg-white border-[#e0e0e0] text-[#333] hover:border-[#00ab67]"
-                        }`}
-                        data-testid={`option-visa-${type.id}`}
-                      >
-                        <Icon className={`w-4 h-4 ${selectedVisaType === type.id ? "text-white" : "text-[#333]"}`} />
-                        {type.nameAr}
-                      </button>
-                    );
-                  })}
                 </div>
               )}
             </div>

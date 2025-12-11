@@ -97,8 +97,6 @@ export interface VisaRequest {
   id: string;
   countryId: string;
   countryName: string;
-  visaTypeId: string;
-  visaTypeName: string;
   travelers: string[];
   status: RequestStatus;
   createdAt: string;
@@ -110,7 +108,6 @@ export interface VisaRequest {
 // Insert visa request schema
 export const insertVisaRequestSchema = z.object({
   countryId: z.string().min(1),
-  visaTypeId: z.string().min(1),
   travelers: z.array(z.string()).min(1),
 });
 
@@ -192,4 +189,45 @@ export interface VisaApiMeta {
 export interface VisaApiResponse {
   data: VisaApiData;
   meta: VisaApiMeta;
+}
+
+// ============== Dynamic Country Fields ==============
+
+export type DynamicFieldKind = "FIELD" | "ATTACHMENT";
+export type DynamicFieldDataType = "TEXT" | "ENUM" | "DATE" | "NUMBER";
+
+export interface EnumOption {
+  value: string;
+  labelEn: string;
+  labelAr: string;
+}
+
+// Source of auto-fill data (from government systems)
+export type AutoFillSource = 
+  | "absher_profile"           // MOI - Basic profile info
+  | "absher_passport"          // MOI - Passport data
+  | "absher_family"            // MOI - Family registry/household
+  | "absher_travel_history"    // MOI - Entry/exit movements
+  | "gosi_employment"          // GOSI - Employment & salary records
+  | "spl_address"              // Saudi Post - Address/residency
+  | "ejar_residency";          // Ejar - Rental/residency proof
+
+export interface DynamicField {
+  fieldKey: string;
+  kind: DynamicFieldKind;
+  dataType?: DynamicFieldDataType; // Only for FIELD kind
+  labelEn: string;
+  labelAr: string;
+  mandatory: boolean;
+  isRepeatable?: boolean; // Allow multiple uploads/entries
+  options?: EnumOption[]; // Only for ENUM type
+  noteEn?: string;
+  noteAr?: string;
+  autoFillSource?: AutoFillSource; // If set, field can be auto-filled
+  isShared?: boolean; // If true, one upload/entry applies to all travelers
+}
+
+export interface CountryFields {
+  countryId: string;
+  fields: DynamicField[];
 }

@@ -3,6 +3,7 @@ import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertVisaRequestSchema, updateVisaRequestSchema, type VisaApiResponse, type Country, type VisaStatus } from "@shared/schema";
 import { getCachedVisaInfo, setCachedVisaInfo, getCachedVisaMap, setCachedVisaMap, type VisaMapData } from "./visaCache";
+import { getCountryFields } from "./data/country-fields";
 import countries from "i18n-iso-countries";
 import arLocale from "i18n-iso-countries/langs/ar.json" assert { type: "json" };
 
@@ -138,6 +139,16 @@ export async function registerRoutes(httpServer: Server, app: Express): Promise<
     }
   });
 
+  // Country-specific dynamic fields
+  app.get("/api/countries/:id/fields", (req, res) => {
+    try {
+      const countryFields = getCountryFields(req.params.id);
+      res.json(countryFields);
+    } catch (err) {
+      res.status(500).json({ error: "Failed to fetch country fields" });
+    }
+  });
+
   // Visa types
   app.get("/api/visa-types", async (_req, res) => {
     try {
@@ -167,9 +178,9 @@ export async function registerRoutes(httpServer: Server, app: Express): Promise<
   });
 
   // Requirements
-  app.get("/api/requirements/:countryId/:visaTypeId", async (req, res) => {
+  app.get("/api/requirements/:countryId", async (req, res) => {
     try {
-      res.json(await storage.getRequirements(req.params.countryId, req.params.visaTypeId));
+      res.json(await storage.getRequirements(req.params.countryId));
     } catch (err) {
       res.status(500).json({ error: "Failed to fetch requirements" });
     }

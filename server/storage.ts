@@ -124,7 +124,7 @@ export interface IStorage {
   getTraveler(id: string): Promise<Traveler | undefined>;
 
   // Requirements operations
-  getRequirements(countryId: string, visaTypeId: string): Promise<VisaRequirement[]>;
+  getRequirements(countryId: string): Promise<VisaRequirement[]>;
 
   // Traveler document status
   getTravelerDocStatus(travelerIds: string[]): Promise<TravelerDocStatus[]>;
@@ -152,8 +152,6 @@ export class MemStorage implements IStorage {
       id: "req-001",
       countryId: "ae",
       countryName: "United Arab Emirates",
-      visaTypeId: "tourist",
-      visaTypeName: "Tourist Visa",
       travelers: ["t1", "t2"],
       status: "completed",
       createdAt: "2024-11-15T10:30:00Z",
@@ -166,8 +164,6 @@ export class MemStorage implements IStorage {
       id: "req-002",
       countryId: "tr",
       countryName: "Turkey",
-      visaTypeId: "tourist",
-      visaTypeName: "Tourist Visa",
       travelers: ["t1"],
       status: "draft",
       createdAt: "2024-12-01T14:00:00Z",
@@ -221,8 +217,8 @@ export class MemStorage implements IStorage {
   }
 
   // Requirements operations
-  async getRequirements(countryId: string, visaTypeId: string): Promise<VisaRequirement[]> {
-    // In real app, this would filter based on country and visa type
+  async getRequirements(countryId: string): Promise<VisaRequirement[]> {
+    // In real app, this would filter based on country
     return mockRequirements;
   }
 
@@ -268,15 +264,12 @@ export class MemStorage implements IStorage {
 
   async createVisaRequest(request: InsertVisaRequest): Promise<VisaRequest> {
     const country = await this.getCountry(request.countryId);
-    const visaType = await this.getVisaType(request.visaTypeId);
 
     const id = `req-${randomUUID().slice(0, 8)}`;
     const newRequest: VisaRequest = {
       id,
       countryId: request.countryId,
       countryName: country?.name || "Unknown",
-      visaTypeId: request.visaTypeId,
-      visaTypeName: visaType?.name || "Unknown",
       travelers: request.travelers,
       status: "draft",
       createdAt: new Date().toISOString(),
