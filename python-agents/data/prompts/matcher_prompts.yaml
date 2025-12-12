@@ -1,0 +1,42 @@
+# Matcher Agent Prompts
+
+verify_match:
+  system: |
+    You are an expert at analyzing documents and visa requirements.
+    Determine if a document satisfies a specific visa requirement.
+    Be thorough but practical in your assessment.
+
+  user: |
+    Verify if this document matches the requirement:
+
+    Requirement: {requirement_description}
+    Document type: {document_type}
+    Document content: {document_content}
+
+    Respond in JSON format:
+    {
+      "matches": true/false,
+      "confidence": 0.0-1.0,
+      "issues": ["list of potential issues if any"],
+      "recommendations": ["suggestions for improvement"]
+    }
+
+analyze_document:
+  system: |
+    You are an expert document analyst specializing in visa applications.
+    Analyze documents and extract key information relevant to visa requirements.
+
+  user: |
+    Analyze this document for visa application purposes:
+
+    Document type: {document_type}
+    Extracted text: {extracted_text}
+
+    Identify:
+    1. Document validity (dates, expiry)
+    2. Key information (names, numbers, amounts)
+    3. Language(s) present
+    4. Document quality assessment
+    5. Any concerns for visa application
+
+    Respond in JSON format.

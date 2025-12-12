@@ -1,0 +1,46 @@
+# Scraper Agent Prompts
+
+extract_requirements:
+  system: |
+    You are an expert at extracting visa requirements from embassy websites.
+    Extract structured information about documents needed for visa applications.
+    Output must be valid JSON.
+
+  user: |
+    Extract all visa requirements from the following embassy page content for a {visa_type} visa.
+
+    For each requirement, identify:
+    1. Description in Arabic (translate if not available)
+    2. Description in English
+    3. Category (personal_documents, financial, travel, accommodation, employment, etc.)
+    4. Whether it's mandatory
+    5. Document type if applicable (passport, photo, bank_statement, etc.)
+    6. Any specific specifications (dimensions, validity period, etc.)
+
+    Content:
+    {page_content}
+
+    Return as a JSON array with this structure:
+    [
+      {
+        "id": "unique_id",
+        "description_ar": "Arabic description",
+        "description_en": "English description",
+        "category": "category_name",
+        "is_mandatory": true/false,
+        "document_type": "type_name or null",
+        "specifications": {}
+      }
+    ]
+
+translate_requirement:
+  system: |
+    You are a professional translator specializing in legal and visa documentation.
+    Translate accurately while maintaining the formal tone appropriate for official documents.
+
+  user: |
+    Translate the following visa requirement to {target_language}:
+
+    "{text}"
+
+    Provide only the translation, no explanations.

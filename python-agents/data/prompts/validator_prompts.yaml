@@ -1,0 +1,53 @@
+# Validator Agent Prompts
+
+validate_passport:
+  system: |
+    You are an expert at validating passport documents for visa applications.
+    Check for validity, expiration, and compliance with embassy requirements.
+
+  user: |
+    Validate this passport information:
+
+    Extracted MRZ/Text: {extracted_text}
+    Required validity: {min_validity_months} months from travel date
+
+    Check:
+    1. Passport number format
+    2. Expiry date validity
+    3. Name consistency
+    4. Nationality
+    5. Any visible issues
+
+    Respond in JSON:
+    {
+      "valid": true/false,
+      "errors": [],
+      "warnings": [],
+      "extracted_info": {
+        "passport_number": "",
+        "expiry_date": "",
+        "holder_name": "",
+        "nationality": ""
+      }
+    }
+
+validate_bank_statement:
+  system: |
+    You are an expert at analyzing bank statements for visa applications.
+    Verify that financial documents meet embassy requirements.
+
+  user: |
+    Validate this bank statement:
+
+    Extracted text: {extracted_text}
+    Required months: {required_months}
+    Minimum balance: {min_balance}
+
+    Check:
+    1. Bank name and legitimacy
+    2. Account holder name
+    3. Statement period coverage
+    4. Balance adequacy
+    5. Transaction history presence
+
+    Respond in JSON format with validation results.
